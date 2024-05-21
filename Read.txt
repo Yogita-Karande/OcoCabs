@@ -1,0 +1,46 @@
+
+-> Header
+-> Main
+-> Footer
+
+--- Pages-----
+
+-> Home
+-> About Us 
+-> Blogs
+-> Login 
+-> Contact Us
+
+---- dependencies-----
+-> Install bootstrap -> add bootstrap route i app.js 
+-> Install Router 
+-> install react router dom
+
+---- Website -----
+
+1. header page ->  
+2. Footer page ->  
+
+20/05/2023
+
+-> Make it should take location
+-> React Animation (npm i react-animations)____Import
+    OR
+-> using AOS (npm i aos)
+    import AOS from "aos";
+    import "aos/dist/aos.css";
+
+Initialize ---
+
+-> useEffect(() => {
+    AOS.init({
+      disable: "phone",
+      duration: 700,
+      easing: "ease-out-cubic",
+    });
+  }, []);
+
+Use AOS 
+
+data-aos="zoom-y-out"
+

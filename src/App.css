@@ -1,0 +1,359 @@
+/* Home */
+
+.App {
+  background-color: white;
+}
+
+.position-absolute {
+  margin-top: 150px;
+}
+
+/* .text-dark:hover {
+  border-bottom: solid ;
+  border-color: black;
+}
+
+.text-dark:active {
+  border-bottom: solid ;
+  border-color: black;
+} */
+
+.accordian-cards:hover {
+  background-color: #cea427;
+}
+
+.accordian-cards {
+  height: 170px;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: #cea427;  
+}
+
+.form-select {
+  background-image: none;
+}
+
+.form-control {
+  width: 200px;
+}
+
+.margin-right {
+  margin-top: 200px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.nav-tabs {
+  border-color: #cea427;
+}
+
+.bg-image {
+  background-image: url('https://www.ococabs.com/images/logo.png');
+}
+
+.pick-location {
+  color: green;
+}
+
+.search-link {
+  background-color: black;
+}
+
+input, button, select, optgroup, textarea {
+  font-family: 'Times New Roman', Times, serif;
+  line-clamp: 2px;
+}
+
+
+@media (min-width: 750px) {
+  .margin-right {
+    margin-top: 100px;
+    margin-right: 90px; 
+  }
+}
+
+@media (max-width: 750px) {
+  .margin-right {
+    margin-top: 100px;
+    margin-right: 23px;
+  }
+}
+
+@media (min-width: 750px) {
+  .enquiry-end-margin {
+    margin-right: 70px;
+  }
+}
+
+.enquiry-button {
+  background-color: #cea427;
+  width: 120px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.one-way-input {
+  background-color: black;
+}
+
+/* Footer */
+
+.footer2 {
+  background-color: #cea427;
+  
+}
+
+.footer {
+  margin-left: 70px;
+  margin-right: 70px ;
+}
+
+/* Navbar */
+
+.my-custom-nav {
+  font-family: 'Times New Roman', Times, serif;
+  
+}
+
+@media (min-width: 750px) {
+  .my-custom-nav {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    gap: 240px;
+  }
+}
+
+@media (max-width: 750px) {
+  .my-custom-nav {
+    margin-top: 0px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 750px) {
+  .header-nav:hover {
+      width: 85px;
+  }
+}
+
+.nav_2 {
+  background-color: #cea427;
+  padding-bottom: 10px;
+}
+
+.nav-link {
+  padding: 5px;
+}
+
+.navbar {
+  padding-right: 10px;
+  padding-left: 10px;
+  font-size: medium;
+ }
+ 
+ .nav-pills {
+   color: #cea427 ;
+ }
+
+.nav-link:active {
+    text-decoration: solid;
+    color: #cea427;   
+}
+
+/* Button */
+
+.btn-primary {
+  background-color: #cea427;
+  border: #cea427;
+}
+
+.btn {
+  background: black;
+}
+
+.btn-primary:hover {
+  background-color: #cea427;
+}
+
+.btn-primary:active {
+  background-color: #cea427;
+}
+
+.contact-button {
+  background-color: #cea427;
+}
+
+.contact-button:hover  {
+  background-color: #cea427;
+}
+
+.contact-button:active {
+  background-color:#cea427 ;
+}
+
+/*** About ***/
+
+.about {
+  color: #cea427;
+}
+
+@media (max-width: 750px) {
+  .about {
+    margin-top: 340px;
+  }
+}
+
+.color {
+  color: #cea427;
+}
+
+/** Testmonials */
+
+.testmonials {
+  color: #cea427;
+}
+
+.checked {
+  color: orange;
+}
+
+.slide {
+  background-color: #000;
+  height: 500px;
+}
+
+@media (max-width: 750px) {
+  .slide {
+    background-color: #000;
+    height: 500px;
+  }
+}
+
+@media (min-width: 750px) {
+  .slide {
+    background-color: #000;
+    height: 430px;
+  }
+}
+
+.content-margin {
+  margin-top: 20px;
+  color: aliceblue;
+}
+
+.content-margin2 {
+  color: aliceblue;
+}
+
+.star {
+  margin-left: 120px;
+}
+
+/*** Main About Us Page ****/
+
+.main-about {
+  color: #cea427;
+}
+
+/* Login Page */
+
+.login {
+  width: 400px;
+}
+
+.login-button {
+  background-color: #cea427;
+}
+
+@media (max-width: 750px) {
+  .login {
+    width: 250px;
+    margin-bottom: 1px;
+  }
+}
+
+.contact-input {
+  width: 520px;
+}
+
+@media (max-width: 750px) {
+  .contact-input {
+    width: 330px;
+  }
+}
+
+@media (max-width: 750px) {
+  .contact-form {
+    margin-left: 10px;
+  }
+}
+
+.text-orange:hover {
+  color: #cea427;
+}
+
+.contact-text {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.contact-form {
+  align-items: end;
+  justify-content: end;
+}
+
+.read-more-button {
+ background-color: #000;
+ width: 100px;
+ color: aliceblue;
+ border-radius: 12px;
+}
+
+@media (max-width: 750px) {
+  .footer {
+    margin-left: 10px;
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 750px) {
+  .footer {
+    margin-left: 100px;
+  }
+}
+
+/* Blogs */
+
+Image:hover {
+  text-size-adjust: 100px;
+}
+
+.blogs-image:hover {
+  size: 500px;
+  transform: scale(1.2);
+}
+
+/* .Blogs-Image {
+  transition: transform 0.3s ease;
+}
+
+.Blogs-Image:hover {
+  transform: scale(1.1); /* Adjust the scale as per your preference */
+
+  .image-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%; /* Ensure the container takes the full width */
+  }
+  
+  .Blogs-Image {
+    transition: transform 0.3s ease;
+    width: 100%;
+    display: block; /* Remove any inline space around the image */
+ 
+  }
+  
+  .Blogs-Image:hover {
+    transform: scale(1.1); /* Zoom in the image */
+  }
+
+  
