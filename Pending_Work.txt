@@ -1,0 +1,39 @@
+Pages ----
+
+-> About Us -> make dynamic --- data will enter dynamically through admin 
+
+-> Blogs -> make dynamic --- data will enter dynamically through admin
+
+-> Cancellation Policy -> make dynamic --- data will enter dynamically through admin
+
+-> Contact Us -> API for post data and user will receive msg (send msg successfully)
+
+-> Login -> Make API if user enter there mobile number he will receive otp from server and if user enter wrong otp he will receive msg (please enter correct otp ) else he will enter right otp he will receive msg (varfication successfully) and after there he will navigate on main page here he will able to see my profile page
+
+-> Home -> make API if he will enter right details he will able to see cars or will get not found msg
+
+-> My Bookings -> 
+
+-> Privacy Policy -> make dynamic --- data will enter dynamically through admin
+
+-> Refund Policy -> make dynamic --- data will enter dynamically through admin
+
+-> Search -> 
+
+-> Terms-and-conditions -> make dynamic --- data will enter dynamically through admin
+
+-> Update-Profile -> API 
+
+-> Verify Otp
+
+****************************************************************************
+(1)
+About Us page ->  text
+Cancellation Policy -> text
+Privacy- Policy -> text
+Refund Policy -> text
+Terms and conditions -> text
+
+(2) Blogs - > Images , text
+
+(3)
