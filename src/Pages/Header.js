@@ -1,10 +1,14 @@
 
 import { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Dropdown from 'react-bootstrap/Dropdown';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 function Header() {
+    const navigate = useNavigate()
     const [activeTab, setActiveTab] = useState(1);
 
     // Function to toggle active tab
@@ -32,6 +36,18 @@ function Header() {
                         <Nav.Link as={NavLink} className='header-nav' to="about-us">About Us</Nav.Link>
                         <Nav.Link as={NavLink} className='header-nav' to="blogs">Blogs</Nav.Link>
                         <Nav.Link as={NavLink} className='header-nav' to="login">Login</Nav.Link>
+                        <Dropdown as={ButtonGroup}>
+                            <Button className='my-account-dropdown btn btn-dark'>My Account</Button>
+
+                            <Dropdown.Toggle split className='my-account-dropdown btn btn-dark' id="dropdown-my-account-basic" />
+
+                            <Dropdown.Menu>
+                                 <Nav.Link as={NavLink} className='header-nav' to="my-bookings">My Bookings</Nav.Link>
+                                 <Nav.Link as={NavLink} className='header-nav' to="update-profile">Update profile</Nav.Link>
+                                 <Nav.Link as={NavLink} className='header-nav' to="login" >Logout</Nav.Link>
+                            </Dropdown.Menu>
+                            </Dropdown>
+                 
                         <Nav.Link as={NavLink} className='header-nav' to="contact-us">Contact Us</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

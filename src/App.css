@@ -34,10 +34,6 @@
   background-image: none;
 }
 
-.form-control {
-  width: 200px;
-}
-
 .margin-right {
   margin-top: 200px;
   font-family: 'Times New Roman', Times, serif;
@@ -119,7 +115,7 @@ input, button, select, optgroup, textarea {
   .my-custom-nav {
     margin-top: 0px;
     margin-bottom: 10px;
-    gap: 240px;
+    gap: 150px;
   }
 }
 
@@ -356,4 +352,12 @@ Image:hover {
     transform: scale(1.1); /* Zoom in the image */
   }
 
-  
+ .my-account-dropdown{
+  color:black;
+  background-color: #cea427;
+ } 
+
+ .my-account-dropdown:hover{
+  color:black;
+  background-color: #cea427;
+ } 

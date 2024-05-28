@@ -10,10 +10,12 @@ import Footer from './Pages/Footer';
 import Header from './Pages/Header';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
+import My_Bookings from './Pages/My_Bookings';
 import PrivacyPolicy from './Pages/Privacy-Policy';
 import RefundPolicy from './Pages/Refund-Policy';
 import Search from './Pages/Search';
 import Termsandcondition from './Pages/Terms-and-condition';
+import Update_Profile from './Pages/Update_Profile';
 
 function App() {
   return (
@@ -31,7 +33,10 @@ function App() {
           <Route path='privacy-policy' element={<PrivacyPolicy />} />
           <Route path='refund-policy' element={<RefundPolicy />} />
           <Route path='cancelation-policy' element={<CancelationPolicy />} />
-        </Routes>
+          <Route path='my-bookings' element={<My_Bookings />} />
+          <Route path='update-profile' element={<Update_Profile />} />
+          {/* <Route path='logout' element={<Logout />} /> */}
+       </Routes>
         <Footer/>
       </BrowserRouter>
     </div>
