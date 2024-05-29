@@ -1,6 +1,21 @@
-import React from 'react'
+import { useEffect, useState } from 'react';
+import { getPageContent } from '../api/Api';
 
 function AboutUs() {
+
+  const [getAboutData, setAboutData] = useState();
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const pageData = await getPageContent('about-us');
+        setAboutData(pageData);
+      } catch (error) {
+        console.error('Error fetching state data:', error);
+      }
+    }
+    fetchData();
+  }, []);
+
   return (
     <div className='about-main mt-4 min-vh-100 ' data-aos="fade-right">
       <h1 className='contact-text main-about text-center text-muted'>ABOUT US</h1>

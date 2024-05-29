@@ -1,7 +1,29 @@
-import React from 'react'
-import { Col, Container, Image, Row } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react';
+import { Col, Container, Image, Row } from 'react-bootstrap';
+import { getDocuments, getPageContent } from '../api/Api';
+
 
 function Blogs() {
+
+  const [getDocumentsData, setDocumentsData] = useState();
+  const [getPageData, setPageData] = useState();
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const pageData = await getPageContent('blogs');
+        setPageData(pageData);
+
+        const Documents = await getDocuments();
+        setDocumentsData(Documents);
+        
+      } catch (error) {
+        console.error('Error fetching state data:', error);
+      }
+    }
+    fetchData();
+  }, []);
+  
   return (
     <Container className='min-vh-100 mt-3'>
       <h1 className='contact-text main-about text-center text-muted'>BLOGS</h1>

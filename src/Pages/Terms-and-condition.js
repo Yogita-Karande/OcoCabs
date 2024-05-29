@@ -1,7 +1,22 @@
-import React from 'react'
-import { Container } from 'react-bootstrap'
+import { useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
+import { getPageContent } from '../api/Api';
 
 function Termsandcondition() {
+
+  const [getAboutData, setAboutData] = useState();
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const pageData = await getPageContent('terms-and-conditions');
+        setAboutData(pageData);
+      } catch (error) {
+        console.error('Error fetching state data:', error);
+      }
+    }
+    fetchData();
+  }, []);
+
   return (
     <>
       <Container className='mb-5'>

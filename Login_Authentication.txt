@@ -1,0 +1,1 @@
+Register -> data post/sava in backend (database) -> login -> check valid mail or number -> if matche or valid data login user -> show some specific data 

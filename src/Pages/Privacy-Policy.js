@@ -1,7 +1,22 @@
-import React from 'react'
-import { Container } from 'react-bootstrap'
+import { useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
+import { getPageContent } from '../api/Api';
 
 function PrivacyPolicy() {
+
+  const [getAboutData, setAboutData] = useState();
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const pageData = await getPageContent('privacy-policy');
+        setAboutData(pageData);
+      } catch (error) {
+        console.error('Error fetching state data:', error);
+      }
+    }
+    fetchData();
+  }, []);
+
   return (
 
     <>
