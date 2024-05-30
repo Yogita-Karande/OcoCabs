@@ -31,7 +31,7 @@ function Search() {
                   </Form.Group>
                 </Col>
                 {/* <hr className='ms-3' /> */}
-                <p className='my-2 ms-5'>Price : <strong>355/-</strong></p>
+                <p className='my-2'><span><i class="fa-solid fa-indian-rupee-sign"></i></span> <strong className='ms-4'>355/-</strong></p>
                 <Col className='text-center d-grid mt-3'>
                   <Button size="md">Book OcoCab</Button>
                 </Col>

@@ -25,6 +25,8 @@ export const getPageContent = async (page) => {
     }
 }
 
+/** used to get documents */
+
 export const getDocuments = async () => {
     try {
         const response = await axios.get( /*BASE_URL*/ + '/get-documents' );
@@ -35,5 +37,25 @@ export const getDocuments = async () => {
         // trigger error alert
         // something went wrong. Please check internet connection.
     }
- }
+}
+
+/** used to fetch cabs */
+
+export const getCabsData = async (page) =>{
+    try {
+        const postData = {
+            api:'get-cabs-data',
+            page: page
+        };
+        const response = await axios.post(/*BASE_URL*/ postData, {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
+        return response.data.data;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
 
