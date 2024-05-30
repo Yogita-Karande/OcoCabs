@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Card, CardBody, Col, Image, NavLink, Row } from 'react-bootstrap';
-import Carousel from 'react-bootstrap/Carousel';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/esm/Container';
 import "react-datepicker/dist/react-datepicker.css";
@@ -8,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import DayRental from './Nested-Home-Pages/Day-Rental';
 import OneWay from './Nested-Home-Pages/One-Way';
 import RoundTrip from './Nested-Home-Pages/Round-Trip';
+import Testmonials from './Testmonials';
 
 function Home() {
   const [activeTab, setActiveTab] = useState(1);
@@ -97,81 +97,8 @@ function Home() {
           </Card>
         </Col>
       </Row>
-
-      <Row className='justify-content-center text-center slide'  data-aos="fade-right">
-        <Carousel slide={false}>
-          <Carousel.Item className='mt-3'>
-          <h3 className='mb-3 text-white contact-text'>TESTMONIALS</h3>
-            <Image src='https://www.ococabs.com/images/testimonials/2420210526012433.jpg' height='200px' roundedCircle width='200px'/><br />
-            <h3 className='content-margin'>Amol Kothari</h3>
-            <span className="ms-0 fa fa-star checked star"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star"></span>
-            <p className='content-margin2'>Nice and affordable cab service very nice calling assistance and are very nice.</p>
-          </Carousel.Item>
-
-          <Carousel.Item className='mt-3'  >
-          <h3 className='mb-3 text-white contact-text'>TESTMONIALS</h3>
-            <Image src='https://www.ococabs.com/images/testimonials/7320210303080318.jpg' height='200px' roundedCircle width='200px' />
-            <h3 className='content-margin'>Vinod kolte</h3>
-            <span className="ms-0 fa fa-star checked star"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star"></span>
-            <p className='content-margin2' >Very nice cab service cost-effective and reliable good and well maintained cab and driver was professional.</p>
-          </Carousel.Item>
-
-          <Carousel.Item className='mt-3'>
-          <h3 className='mb-3 text-white contact-text'>TESTMONIALS</h3>
-            <Image src='https://www.ococabs.com/images/testimonials/7120210604023248.jpg' height='200px' roundedCircle width='200px' />
-            <h3 className='content-margin'>Ajay Lathe</h3>
-            <span className="ms-0 fa fa-star checked star"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star"></span>
-            <p className='content-margin2' >Affordable And cost-effective Taxi service</p>
-          </Carousel.Item>
-
-          <Carousel.Item className='mt-3'>
-          <h3 className='mb-3 text-white contact-text'>TESTMONIALS</h3>
-            <Image src='https://www.ococabs.com/images/testimonials/5220201108042350.jpg' height='200px' roundedCircle width='200px' />
-            <h3 className='content-margin'>Nilesh Lathe</h3>
-            <span className="ms-0 fa fa-star checked star"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star"></span>
-            <p className='content-margin2' >Best car service in pune & mumbai</p>
-          </Carousel.Item>
-
-          <Carousel.Item className='mt-3'>
-          <h3 className='mb-3 text-white contact-text'>TESTMONIALS</h3>
-            <Image src='https://www.ococabs.com/images/testimonials/2720210116102631.jpg' height='200px' roundedCircle width='200px' />
-            <h3 className='content-margin'>Akash maske</h3>
-            <span className="ms-0 fa fa-star checked star"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star"></span>
-            <p className='content-margin2' >Very good cab service in pune to nashik.</p>
-          </Carousel.Item>
-
-          <Carousel.Item className='mt-3'>
-          <h3 className='mb-3 text-white contact-text'>TESTMONIALS</h3>
-            <Image src='https://www.ococabs.com/images/testimonials/9320201113050613.jpg' height='200px' roundedCircle width='200px' />
-            <h3 className='content-margin'>Kapil Kothalkar </h3>
-            <span className="ms-0 fa fa-star checked star"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star"></span>
-            <p className='content-margin2' >The driver and vehicle was good. Driver Irshad was very accommodative and drove well. His vehicle was also in a very good condition. Good service with good security terms.</p>
-          </Carousel.Item>
-        </Carousel>
+      <Row>
+        <Testmonials/>
       </Row>
     </Container>
   )

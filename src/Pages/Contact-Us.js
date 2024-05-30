@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Col, Container, Form, Image, Row } from 'react-bootstrap';
-import { useNavigate } from 'react-router';
+import { makeEnquiry } from '../api/Api';
 
 function ContactUs() {
 
   const initialvalues = { name: "", message: "", number: "", email: "", captcha: "" }
-  const navigate = useNavigate()
-  const navigateTo = () => navigate('/search');
   const [formvalues, setformvalues] = useState(initialvalues)
+  const [successMessage, setSuccessMessage] = useState()
 
   const handleChange = (e) => {
     setformvalues(prevValues => ({ ...prevValues, [e.target.name]: e.target.value }));
@@ -15,6 +14,12 @@ function ContactUs() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const contactEnquiryData = await makeEnquiry(formvalues);
+      setSuccessMessage(contactEnquiryData.message);
+    } catch (error) {
+      console.error("Error making enquiry:", error);
+    }
   }
 
   return (
@@ -57,9 +62,16 @@ function ContactUs() {
 
             <Image className="border" src="https://www.ococabs.com/captcha" alt="verification" height="40" align="absbottom" />
 
-            <Col className='mt-3 mb-4'>
-              <button size="md" type='submit' className=' contact-input contact-button btn btn-md btn-block'> Send Message </button>
-            </Col>
+            {
+              successMessage ? ("") : (<Col className='mt-3 mb-4'>
+                <button size="md" type='submit' className=' contact-input contact-button btn btn-md btn-block'> Send Message </button>
+              </Col>)
+            }
+
+            <p >{successMessage && (
+              <span className='text-orange fw-bold'>{successMessage}</span>
+            )}</p>
+            
           </Col>
         </Row>
       </Form>

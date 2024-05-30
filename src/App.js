@@ -15,7 +15,9 @@ import PrivacyPolicy from './Pages/Privacy-Policy';
 import RefundPolicy from './Pages/Refund-Policy';
 import Search from './Pages/Search';
 import Termsandcondition from './Pages/Terms-and-condition';
+import Testmonials from './Pages/Testmonials';
 import Update_Profile from './Pages/Update_Profile';
+import Verify_Otp from './Pages/Verify_Otp';
 
 function App() {
   return (
@@ -35,7 +37,8 @@ function App() {
           <Route path='cancelation-policy' element={<CancelationPolicy />} />
           <Route path='my-bookings' element={<My_Bookings />} />
           <Route path='update-profile' element={<Update_Profile />} />
-          {/* <Route path='logout' element={<Logout />} /> */}
+          <Route path='verify-number' element={<Verify_Otp />} />
+          <Route path='testmonials' element={<Testmonials />} />
        </Routes>
         <Footer/>
       </BrowserRouter>

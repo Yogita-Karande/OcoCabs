@@ -66,18 +66,15 @@ input, button, select, optgroup, textarea {
     margin-top: 100px;
     margin-right: 90px; 
   }
+  .enquiry-end-margin {
+    margin-right: 50px;
+  }
 }
 
 @media (max-width: 750px) {
   .margin-right {
     margin-top: 100px;
     margin-right: 23px;
-  }
-}
-
-@media (min-width: 750px) {
-  .enquiry-end-margin {
-    margin-right: 70px;
   }
 }
 
@@ -115,7 +112,7 @@ input, button, select, optgroup, textarea {
   .my-custom-nav {
     margin-top: 0px;
     margin-bottom: 10px;
-    gap: 150px;
+    gap: 250px;
   }
 }
 
@@ -361,3 +358,10 @@ Image:hover {
   color:black;
   background-color: #cea427;
  } 
+
+ .star {
+  margin: 0 2px; /* Adjust this value to control the space between stars */
+}
+.checked {
+  color: gold;
+}
