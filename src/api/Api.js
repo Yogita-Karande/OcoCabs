@@ -155,3 +155,27 @@ export const getTestmonials = async () => {
 }
 
 /******************************************************************** */
+
+/*****
+ * Used to add updata data
+ * @postData -> form data()
+ */
+
+export const updateProfile = async (api, token) => {
+    try {
+        const postData = {
+            api: api,
+            token: token
+        }
+        const response = await axios.put(/*BASE_URL*/ postData, {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
+       
+        return getResponse(response);
+    } catch (error) {
+        console.log(error);
+    }
+}
+/************************************************************ */
