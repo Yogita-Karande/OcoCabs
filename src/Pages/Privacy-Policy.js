@@ -8,8 +8,9 @@ function PrivacyPolicy() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const pageData = await getPageContent('privacy-policy');
+        const pageData = await getPageContent('5');
         setAboutData(pageData);
+        console.log(pageData)
       } catch (error) {
         console.error('Error fetching state data:', error);
       }

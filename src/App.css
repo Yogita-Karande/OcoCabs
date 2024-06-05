@@ -8,16 +8,6 @@
   margin-top: 150px;
 }
 
-/* .text-dark:hover {
-  border-bottom: solid ;
-  border-color: black;
-}
-
-.text-dark:active {
-  border-bottom: solid ;
-  border-color: black;
-} */
-
 .accordian-cards:hover {
   background-color: #cea427;
 }
@@ -60,7 +50,6 @@ input, button, select, optgroup, textarea {
   line-clamp: 2px;
 }
 
-
 @media (min-width: 750px) {
   .margin-right {
     margin-top: 100px;
@@ -92,8 +81,7 @@ input, button, select, optgroup, textarea {
 /* Footer */
 
 .footer2 {
-  background-color: #cea427;
-  
+  background-color: #cea427; 
 }
 
 .footer {
@@ -104,8 +92,7 @@ input, button, select, optgroup, textarea {
 /* Navbar */
 
 .my-custom-nav {
-  font-family: 'Times New Roman', Times, serif;
-  
+  font-family: 'Times New Roman', Times, serif;  
 }
 
 @media (min-width: 750px) {
@@ -325,29 +312,22 @@ Image:hover {
   transform: scale(1.2);
 }
 
-/* .Blogs-Image {
-  transition: transform 0.3s ease;
-}
-
-.Blogs-Image:hover {
-  transform: scale(1.1); /* Adjust the scale as per your preference */
-
-  .image-container {
+.image-container {
     position: relative;
     overflow: hidden;
     width: 100%; /* Ensure the container takes the full width */
-  }
+}
   
-  .Blogs-Image {
-    transition: transform 0.3s ease;
-    width: 100%;
-    display: block; /* Remove any inline space around the image */
- 
-  }
-  
-  .Blogs-Image:hover {
-    transform: scale(1.1); /* Zoom in the image */
-  }
+.Blogs-Image {
+  transition: transform 0.3s ease;
+  width: 100%;
+  display: block; /* Remove any inline space around the image */
+
+}
+
+.Blogs-Image:hover {
+  transform: scale(1.1); /* Zoom in the image */
+}
 
  .my-account-dropdown{
   color:black;
@@ -364,4 +344,20 @@ Image:hover {
 }
 .checked {
   color: gold;
+}
+
+ .nav-link:hover, .nav-link:focus {
+  color: #cea427;
+}
+
+.border-bottom {
+  border-color: #000 !important;
+}
+
+.btn1 {
+  color: #000;
+}
+
+.btn2 {
+  color: #000;
 }

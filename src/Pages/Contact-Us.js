@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Col, Container, Form, Image, Row } from 'react-bootstrap';
+import { Col, Container, Form, Row } from 'react-bootstrap';
 import { makeEnquiry } from '../api/Api';
 
 function ContactUs() {
 
-  const initialvalues = { name: "", message: "", number: "", email: "", captcha: "" }
+  const initialvalues = { name: "", number: "", email: "", type:"", subject:"", message: "" }
   const [formvalues, setformvalues] = useState(initialvalues)
   const [successMessage, setSuccessMessage] = useState()
 
@@ -15,7 +15,9 @@ function ContactUs() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log(formvalues)
       const contactEnquiryData = await makeEnquiry(formvalues);
+      console.log(contactEnquiryData)
       setSuccessMessage(contactEnquiryData.message);
     } catch (error) {
       console.error("Error making enquiry:", error);
@@ -53,14 +55,21 @@ function ContactUs() {
             </Form.Group>
 
             <Form.Group controlId="validationCustom04">
-              <Form.Control type="email" placeholder='Enter Below Captcha' required name="captcha" value={formvalues.captcha} onChange={handleChange} className='contact-input mb-3' />
+              <Form.Control type="text" placeholder='Type' required className=' contact-input mb-3' name="type" value={formvalues.type} onChange={handleChange} />
             </Form.Group>
 
             <Form.Group controlId="validationCustom05">
-              <Form.Control as="textarea" style={{ height: '100px' }} required placeholder='Enter your message/query' name="message" value={formvalues.message} onChange={handleChange} className='contact-input mb-3' />
+              <Form.Control type="text" placeholder='Subject' required className=' contact-input mb-3' name="subject" value={formvalues.subject} onChange={handleChange} />
             </Form.Group>
 
-            <Image className="border" src="https://www.ococabs.com/captcha" alt="verification" height="40" align="absbottom" />
+            {/* <Form.Group controlId="validationCustom04">
+              <Form.Control type="text" placeholder='Enter Below Captcha' required name="captcha" value={formvalues.captcha} onChange={handleChange} className='contact-input mb-3' />
+            </Form.Group> */}
+
+            <Form.Group controlId="validationCustom06">
+              <Form.Control as="textarea" style={{ height: '100px' }} required placeholder='Enter your message/query' name="message" value={formvalues.message} onChange={handleChange} className='contact-input mb-3' />
+            </Form.Group>
+            {/* <Image className="border" src="https://www.ococabs.com/captcha" alt="verification" height="40" align="absbottom" /> */}
 
             {
               successMessage ? ("") : (<Col className='mt-3 mb-4'>
@@ -71,7 +80,7 @@ function ContactUs() {
             <p >{successMessage && (
               <span className='text-orange fw-bold'>{successMessage}</span>
             )}</p>
-            
+
           </Col>
         </Row>
       </Form>

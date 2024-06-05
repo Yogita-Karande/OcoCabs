@@ -2,7 +2,7 @@ export const testimonials = [
     {
         "name": "Amol Kothari",
         "image": "https://www.ococabs.com/images/testimonials/2420210526012433.jpg",
-        "rating": 4,
+        "rating": 3,
         "message": "Nice and affordable cab service very nice calling assistance and are very nice."
     },
     {

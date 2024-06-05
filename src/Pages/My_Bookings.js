@@ -1,19 +1,41 @@
-import React from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
+import React, { useState } from 'react';
+import { Card, Col, Container, Nav, Row } from 'react-bootstrap';
+import Previous_Journey from './Previous_Journey';
+import Upcoming_Journey from './Upcoming_Journey';
 
 function My_Bookings() {
+
+  const [toggle, settoggle] = useState(1)
+
+  const toggleTab = (index) => {
+    settoggle(index)
+  }
+
   return (
     <>
-        <Container className='min-vh-100'>
-        <h1 className='contact-text main-about text-center text-muted my-4 fs-2'>MY BOOKINGS</h1>
-            <Row>
-                <Col>
-                    <h1 className='text-center text-danger fs-3 mt-5'>You haven't use our cab service yet. To enjoy comfortable journey, travel by our cabs.</h1>
-                </Col>
-            </Row>
-        </Container>
+      <Container fluid className='min-vh-100 '>
+        <h1 className='my-booking  text-center text-muted fs-2 my-3'>MY BOOKINGS</h1>
+        <Row>
+          <Col>
+            <Card className='py-3 p-3'>
+              <Card.Body >
+                <Nav fill variant="tabs" defaultActiveKey="link-1" className='mb-3'>
+                  <Nav.Item >
+                    <Nav.Link className="btn1" onClick={() => toggleTab(1)} eventKey="link-1">Previous Journey</Nav.Link>
+                  </Nav.Item >
+                  <Nav.Item>
+                    <Nav.Link className="btn2" onClick={() => toggleTab(2)} eventKey="link-2">Upcoming Journey</Nav.Link>
+                  </Nav.Item>
+                </Nav>
+                {toggle === 1 && <Previous_Journey />}
+                {toggle === 2 && <Upcoming_Journey />}
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     </>
   )
-} 
+}
 
 export default My_Bookings

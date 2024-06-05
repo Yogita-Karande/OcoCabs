@@ -11,11 +11,13 @@ import Header from './Pages/Header';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 import My_Bookings from './Pages/My_Bookings';
+import Previous_Journey from './Pages/Previous_Journey';
 import PrivacyPolicy from './Pages/Privacy-Policy';
 import RefundPolicy from './Pages/Refund-Policy';
 import Search from './Pages/Search';
 import Termsandcondition from './Pages/Terms-and-condition';
 import Testmonials from './Pages/Testmonials';
+import Upcoming_Journey from './Pages/Upcoming_Journey';
 import Update_Profile from './Pages/Update_Profile';
 import Verify_Otp from './Pages/Verify_Otp';
 
@@ -39,8 +41,10 @@ function App() {
           <Route path='update-profile' element={<Update_Profile />} />
           <Route path='verify-number' element={<Verify_Otp />} />
           <Route path='testmonials' element={<Testmonials />} />
-       </Routes>
-        <Footer/>
+          <Route path='previous-journey' element={<Previous_Journey />} />
+          <Route path='upcoming-journey' element={<Upcoming_Journey />} />
+        </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );

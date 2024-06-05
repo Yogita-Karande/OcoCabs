@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card, Col, Container, Form, Row } from 'react-bootstrap';
 import { useParams } from "react-router";
-import { verifyNumber } from '../api/Api';
+import { verifylogin } from '../api/Api';
 
 function Verify_Otp() {
 
@@ -27,7 +27,7 @@ function Verify_Otp() {
         throw new Error("Form data is undefined or null.");
       }
   
-      const submittedForm = await verifyNumber(formData);
+      const submittedForm = await verifylogin(formData);
   
       console.log("Submitted form:", submittedForm);
   
