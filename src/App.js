@@ -4,6 +4,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import AboutUs from './Pages/About-Us';
 import Blogs from './Pages/Blogs';
+import BookingDetails from './Pages/BookingDetails';
+import Booking_Successful from './Pages/Booking_Successful';
+import CancelBooking from './Pages/CancelBooking';
 import CancelationPolicy from './Pages/Cancelation-Policy';
 import ContactUs from './Pages/Contact-Us';
 import Footer from './Pages/Footer';
@@ -11,6 +14,7 @@ import Header from './Pages/Header';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 import My_Bookings from './Pages/My_Bookings';
+import Notification from './Pages/Notification';
 import Previous_Journey from './Pages/Previous_Journey';
 import PrivacyPolicy from './Pages/Privacy-Policy';
 import RefundPolicy from './Pages/Refund-Policy';
@@ -43,6 +47,10 @@ function App() {
           <Route path='testmonials' element={<Testmonials />} />
           <Route path='previous-journey' element={<Previous_Journey />} />
           <Route path='upcoming-journey' element={<Upcoming_Journey />} />
+          <Route path='notification' element={<Notification/>} />
+          <Route path='bookingdetails' element={<BookingDetails/>} />
+          <Route path='booking-successful' element={<Booking_Successful/>} />
+          <Route path='cancelbooking' element={<CancelBooking/>} />
         </Routes>
         <Footer />
       </BrowserRouter>

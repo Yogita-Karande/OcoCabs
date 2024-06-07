@@ -361,3 +361,51 @@ Image:hover {
 .btn2 {
   color: #000;
 }
+
+/* Profile Page */
+
+.profile-image {
+  margin-left: 140px;
+}
+
+.bg-card {
+  background-color: rgb(78, 209, 51);
+}
+
+.customer-name {
+  margin-top: 150px;
+}
+
+.icon-circle {
+  /* display: inline-block; */
+ 
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  /* line-height: 400px; */
+  background-color: #28a745; /* Adjust the background color as needed */
+  color: white; /* Adjust the text color as needed */
+  text-align: center;
+  font-size: 50px; /* Adjust the font size as needed */
+}
+
+.done-button {
+  background-color: #28a745;
+  color: white;
+  width: 100px;
+  border-radius: 10px;
+
+}
+
+.done-button:hover {
+  color: white;
+}
+
+.done-button:active {
+  color: white;
+}
+
+.cancel-booking {
+  background-color:#cea427;
+  color: #000;
+}

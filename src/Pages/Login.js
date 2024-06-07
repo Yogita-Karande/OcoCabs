@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Col, Container, Form, Row } from 'react-bootstrap';
-import { getLogin } from '../api/Api';
+import { verifylogin } from '../api/Api';
 import { setToken } from '../authentication_token/Token';
 
 function Login() {
@@ -12,12 +12,11 @@ function Login() {
     setformvalues(prevValues => ({ ...prevValues, [e.target.name]: e.target.value }));
   }
 
-  // console.log(formvalues)
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formvalues)
     try {
-      const submittedForm = await getLogin(formvalues);
+      const submittedForm = await verifylogin(formvalues);
 
       if (submittedForm.status === 200) {
         setToken(submittedForm.data.token); // Set the token received from the backend

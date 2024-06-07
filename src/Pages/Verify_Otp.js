@@ -16,27 +16,20 @@ function Verify_Otp() {
   console.log(formData)
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Assuming formData is defined somewhere in your code
-    // and represents the data from the form.
-    console.log(formData);
-  
     try {
-      
+
       if (!formData) {
         throw new Error("Form data is undefined or null.");
       }
-  
       const submittedForm = await verifylogin(formData);
-  
       console.log("Submitted form:", submittedForm);
-  
+
       if (!submittedForm || !submittedForm.status) {
         throw new Error("Invalid response from verifyNumber.");
       }
-        
+
       console.log(submittedForm);
-  
+
       if (submittedForm.status === 200) {
         setNumberSuccess(submittedForm.message);
       } else {
@@ -63,8 +56,14 @@ function Verify_Otp() {
                 }
 
                 <Form.Group controlId="exampleForm.ControlInput1" >
-                  <Form.Control type="text" placeholder="Enter otp" required className='login mt-4 mx-auto' name="otp" value={formData.otp} onChange={handleChange} />
-
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter otp"
+                    required
+                    className='login mt-4 mx-auto'
+                    name="otp"
+                    value={formData.otp}
+                    onChange={handleChange} />
                 </Form.Group>
 
                 <Col className=" d-grid gap-2 text-center login-button mt-4 mx-lg-5" rounded>

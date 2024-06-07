@@ -4,6 +4,7 @@ import { getPageContent } from '../api/Api';
 function AboutUs() {
 
   const [getAboutData, setAboutData] = useState();
+  
   useEffect(() => {
     async function fetchData() {
       try {

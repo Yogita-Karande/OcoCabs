@@ -12,7 +12,6 @@ import Testmonials from './Testmonials';
 function Home() {
   const [activeTab, setActiveTab] = useState(1);
 
-   // Function to toggle active tab
    const toggleTab = (tab) => {
      setActiveTab(tab);
    };

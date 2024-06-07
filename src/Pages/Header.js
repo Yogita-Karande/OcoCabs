@@ -8,10 +8,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
 import { getToken, removeToken } from '../authentication_token/Token';
 
-
 function Header() {
 
-    const [token , setToken] = useState ('')
+    const [token, setToken] = useState('')
 
     useEffect(() => {
         setToken(getToken());
@@ -20,7 +19,7 @@ function Header() {
     const handleLogout = () => {
         removeToken();
         console.log('Logged out and token removed!');
-      };
+    };
 
     return (
         <>
@@ -41,17 +40,17 @@ function Header() {
                         <Nav.Link as={NavLink} className='header-nav' to="/">Home</Nav.Link>
                         <Nav.Link as={NavLink} className='header-nav' to="about-us">About Us</Nav.Link>
                         <Nav.Link as={NavLink} className='header-nav' to="blogs">Blogs</Nav.Link>
-                        
-                        {token == undefined ? (<Dropdown as={ButtonGroup}>
+
+                        {token  ? (<Dropdown as={ButtonGroup}>
                             <Button className='my-account-dropdown btn btn-dark'>My Account</Button>
                             <Dropdown.Toggle split className='my-account-dropdown btn btn-dark' id="dropdown-my-account-basic" />
                             <Dropdown.Menu>
                                 <Nav.Link as={NavLink} className='header-nav' to="my-bookings">My Bookings</Nav.Link>
+
                                 <Nav.Link as={NavLink} className='header-nav' to="update-profile">Update profile</Nav.Link>
-                                <Nav.Link as={NavLink} className='header-nav'onClick={handleLogout} >Logout</Nav.Link>
+                                <Nav.Link as={NavLink} className='header-nav' onClick={handleLogout} >Logout</Nav.Link>
                             </Dropdown.Menu>
                         </Dropdown>) : <Nav.Link as={NavLink} className='header-nav' to="login">Login</Nav.Link>}
-
                         <Nav.Link as={NavLink} className='header-nav' to="contact-us">Contact Us</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
@@ -59,5 +58,4 @@ function Header() {
         </>
     );
 }
-
 export default Header
