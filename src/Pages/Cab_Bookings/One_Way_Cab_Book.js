@@ -1,23 +1,36 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, CardBody, CardGroup, Col, Container, Form, Row } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
-import { useNavigate } from 'react-router';
-import { createBooking } from '../api/Api';
+import { useNavigate, useParams } from 'react-router';
+import { useLocation } from 'react-router-dom';
+import { createBooking } from '../../api/Api';
+import { getToken } from '../../authentication_token/Token';
 
-function Search() {
-
-  const initialvalues = { source: "", destination: "", journeydatetime: "", token: "" }
+function One_Way_Cab_Book() {
+  const { pickuplocation , droplocation , type , journeydatetime} = useParams()
+  const initialvalues = { city: "", rental_package: "", type: "", journeydatetime: "" }
   const [data, setData] = useState();
   const [error, setError] = useState();
+  const [token ,setToken] = useState();
+  
   const [formvalues, setformvalues] = useState(initialvalues)
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // const { type , city, rental_package, journeydatetime } = useParams();
 
   /** States */
+
+  
+  useEffect(() => {
+    setToken(getToken());
+}, []);
+
 
   const handleCreateBooking = async (e) => {
     e.preventDefault();
     try {
-      const submittedForm = await createBooking('create-booking', formvalues);
+      const submittedForm = await createBooking( formvalues, token);
       console.log(submittedForm);
 
       if (submittedForm.status === 200) {
@@ -30,6 +43,7 @@ function Search() {
       console.error('Error updating profile:', error);
     }
   }
+  
   return (
     <Container className='min-vh-100'>
       <h1 className='fs-3 text-center mt-3  text-muted'>SEARCH</h1>
@@ -42,11 +56,11 @@ function Search() {
                   <Col>
                     <Form.Group controlId="formGridPhoneNo" className='d-flex' >
                       <span>
-                        <i class="fa-solid fa-circle-dot mt-3 me-2 border-0 pick-location"></i>
+                        <i className="fa-solid fa-circle-dot mt-3 me-2 border-0 pick-location"></i>
                       </span>
                       <Form.Control
                         className="mt-1 border-0"
-                        value={'hey'}
+                        value={pickuplocation}
                         readOnly
                       />
                     </Form.Group>
@@ -55,12 +69,12 @@ function Search() {
 
                   <Col className='mt-3 d-flex'>
                     <span>
-                      <i class="fa-solid fa-circle-dot mt-2 me-2"></i>
+                      <i className="fa-solid fa-circle-dot mt-2 me-2"></i>
                     </span>
                     <Form.Control
                       aria-label="Default select example"
                       className="border-0 "
-                      value={'hlo'}
+                      value={droplocation}
                       readOnly
                      />
                   </Col>
@@ -69,13 +83,13 @@ function Search() {
                   <Col className='mt-3'>
                     <Form.Group controlId="formGridPhoneNo" className='d-flex' >
                       <span>
-                        <i class="fa-solid fa-phone mt-2 me-2"></i>
+                        <i className="fa-solid fa-phone mt-2 me-2"></i>
                       </span>
                       <Form.Control
                         type="text"
                         placeholder='type'
                         className="border-0"
-                        value={'hii'}
+                        value={type}
                         readOnly
                       />
                     </Form.Group>
@@ -89,13 +103,13 @@ function Search() {
                       showTimeSelect
                       dateFormat="MMMM d, yyyy h:mm aa"
                       className='border-0'
-                      value={"m,,"}
+                      value={journeydatetime}
                       name='calender'
                       readOnly
                     />
                   </Col>
                   <Col className="d-grid gap-2 text-center search-link text-white mt-4" rounded>
-                    <button size="md" type='search' className='btn btn-md btn-block text-white'> Search Cab </button>
+                    <button size="md" type='search' className='btn btn-md btn-block text-white'> Book Cab </button>
                   </Col>
                 </Form>
               </CardBody>
@@ -107,4 +121,4 @@ function Search() {
   )
 }
 
-export default Search
+export default One_Way_Cab_Book;

@@ -1,23 +1,29 @@
 import { useEffect, useState } from 'react';
-import { Col, Form } from 'react-bootstrap';
+import { Col, Form, FormSelect } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 import { useNavigate } from 'react-router-dom';
-import { getRentalPackage, routeDetails } from '../../api/Api';
+import { getRouteDetails } from '../../api/Api';
 import { getToken } from '../../authentication_token/Token';
+import {getRentalPackage} from '../../api/Api'
 
 function DayRental() {
-
-    const initialvalues = { city: "", rental_package: "", type: "", journeydatetime: "", token: "" }
+    const initialvalues = { pickuplocation: "", droplocation: "", type: "", time:'',  }
     const navigate = useNavigate()
-
-    /** States */
 
     const [formvalues, setformvalues] = useState(initialvalues)
     const [startDate, setStartDate] = useState(null);
     const [token, setToken] = useState();
     const [data, setData] = useState();
     const [error, setError] = useState();
-    const [rentalPackage, setRentalPackage] = useState()
+    const [rental , setRental] = useState()
+
+    const handleDateChange = (date) => {
+        setStartDate(date);     
+        setformvalues({
+                ...formvalues,
+                journeydatetime: date, // Update journeydatetime in form values           
+        });
+    };
 
     /** set token here */
 
@@ -25,38 +31,18 @@ function DayRental() {
         setToken(getToken());
     }, []);
 
-    /** fetch rental package data from API  */
-
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const rentalPackageData = await getRentalPackage('get-rental-package')
-                setRentalPackage(rentalPackageData)
-            }
-            catch (error) {
-                console.log(error)
-            }
-        }
-        fetchData()
-    }, [])
-
-    /** Handle Changes */
-
     const handleChange = (e) => {
         setformvalues(prevValues => ({ ...prevValues, [e.target.name]: e.target.value }));
     }
 
-    /** Handle Submit */
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const submittedForm = await routeDetails('get-route-details', formvalues);
-            console.log(submittedForm);
-
+            const submittedForm = await getRouteDetails(formvalues);
+            console.log(submittedForm.data)
             if (submittedForm.status === 200) {
                 setData(submittedForm);
-                navigate('/search')
+                navigate(`/one-way-cab/${formvalues.city}/${formvalues.rentalpackage}/${formvalues.type}/${formvalues.journeydatetime}`)
             } else {
                 setError(submittedForm.message);
             }
@@ -65,59 +51,83 @@ function DayRental() {
         }
     }
 
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const rentalPackageData = await getRentalPackage('day-rental')
+                setRental(rentalPackageData)
+            }
+            catch (error) {
+                console.log(error)
+            }
+        }
+        fetchData()
+    }, [])
+
+
     return (
         <Form className='mt-4' onSubmit={handleSubmit}>
             <Col>
                 <Form.Group controlId="formGridPhoneNo" className='d-flex' >
                     <span>
-                        <i class="fa-solid fa-circle-dot mt-3 me-2 border-0 pick-location"></i>
+                        <i className="fa-solid fa-circle-dot mt-3 me-2 border-0 pick-location"></i>
                     </span>
-                    <Form.Select
+                    <FormSelect
                         className="mt-1 border-0"
-                        name="city" 
+                        name="city"
                         value={formvalues.city}
                         onChange={handleChange}
+                        placeholder='Pick Up Location'
+                        type="text"
                         required
                         >
-                        <option value="" className='text-muted'>Select City</option>
-                    </Form.Select>
+                        <option value="">Select Pickup Location</option>
+                        <option>Narhe</option>
+                    </FormSelect>
                 </Form.Group>
-                <hr className='ms-4' />
-            </Col>
-
-            <Col className='mt-3 d-flex'>
-                <span>
-                    <i class="fa-solid fa-circle-dot mt-2 me-2"></i>
-                </span>
-                <Form.Select
-                    aria-label="Default select example"
-                    className="border-0 "
-                    required
-                    value={formvalues.rental_package}
-                    onChange={handleChange}
-                    name='rental_package'>
-                    <option value="" className='text-muted'>Rental Package</option>
-                    {/* {
-                    rentalPackage && (
-                    rentalPackage.map((item, index) => (
-                    <option key={index} value={item.id} >{item.hours}{item.kms}</option>
-                )))} */}
-
-                </Form.Select>
             </Col>
             <hr className='ms-4' />
 
             <Col className='mt-3'>
                 <Form.Group controlId="formGridPhoneNo" className='d-flex' >
                     <span>
-                        <i class="fa-solid fa-car-side mt-2"></i>
+                        <i className="fa-solid fa-circle-dot mt-2 me-2"></i>
                     </span>
-                    <Form.Control
+                    <FormSelect
+                        className="border-0  "
+                        name="rentalpackage"
+                        value={formvalues.rentalpackage}
+                        onChange={handleChange}
+                        type='text'
+                        placeholder='Drop location'
+                        required >
+                        <option value="">Select Rental Package</option>
+                        {
+                            rental && (
+                                rental.map((item, index) => (
+                                    <option className="text-dark" key={index} value={index.id}>{item.name}</option>
+                                )))}
+                    </FormSelect>
+                </Form.Group>
+            </Col>
+            <hr className='ms-4' />
+
+            <Col className='mt-3'>
+                <Form.Group controlId="formGridPhoneNo" className='d-flex' >
+                    <span>
+                        <i className="fa-solid fa-car-side mt-2"></i>
+                    </span>
+                    <FormSelect
                         type="text"
                         className="border-0"
                         placeholder='Type'
-                        name="type" value={formvalues.type}
-                        onChange={handleChange} required />
+                        name="type"
+                        value={formvalues.type}
+                        onChange={handleChange}
+                        required>
+                        <option value="" className='text-muted'>Select Type</option>
+                        <option className='text-muted'>day rental</option>
+                    </FormSelect>
                 </Form.Group>
             </Col>
             <hr className='ms-4' />
@@ -130,15 +140,15 @@ function DayRental() {
                     showTimeSelect
                     dateFormat="MMMM d, yyyy h:mm aa"
                     className='border-0'
-                    onChange={date => setStartDate(date)}
-                    value={formvalues.calender}
-                    name='calender'
+                    value={formvalues.journeydatetime}
+                    onChange={handleDateChange}
+                    name='time'
                     required
                 />
             </Col>
 
-            <Col className="d-grid gap-2 text-center search-link text-white mt-4" rounded>
-                <button size="md" type='search' className='btn btn-md btn-block text-white'> Search Cab </button>
+            <Col className="d-grid gap-2 search-link text-center mt-4" rounded>
+                <button size="md" type='search' className='btn btn-md btn-block text-white '> Search Cab </button>
             </Col>
         </Form>
     )

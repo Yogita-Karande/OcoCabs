@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
-import { Col, Form } from 'react-bootstrap';
+import { Col, Form, FormSelect } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 import { useNavigate } from 'react-router-dom';
-import { routeDetails } from '../../api/Api';
+import { getRouteDetails } from '../../api/Api';
 import { getToken } from '../../authentication_token/Token';
 
-function OneWayReusable() {
+function RoundTrip() {
 
-    const initialvalues = { pickuplocation: "", droplocation: "", contact: "", journeydatetime: "", returndatetime: "" }
+    const initialvalues = { pickuplocation: "", droplocation: "", type: "", journeydatetime: null, returndatetime: null , }
     const navigate = useNavigate()
-
     const [formvalues, setformvalues] = useState(initialvalues)
     const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
     const [token, setToken] = useState();
     const [data, setData] = useState();
     const [error, setError] = useState();
@@ -29,12 +29,12 @@ function OneWayReusable() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const submittedForm = await routeDetails('get-route-details', formvalues);
-            console.log(submittedForm);
+            const submittedForm = await getRouteDetails(formvalues);
+            console.log(submittedForm.data);
 
             if (submittedForm.status === 200) {
                 setData(submittedForm);
-                navigate('/search')
+                navigate(`/round-trip-cab/${formvalues.pickuplocation}/${formvalues.droplocation}/${formvalues.type}/${formvalues.journeydatetime}/${formvalues.returndatetime}`)
             } else {
                 setError(submittedForm.message);
             }
@@ -44,21 +44,42 @@ function OneWayReusable() {
 
     }
 
+    const handleDateChange = (date,name) => {
+           
+        if (name === 'journeydatetime') {
+            setStartDate(date);
+            setformvalues({
+                ...formvalues,
+                journeydatetime: date,
+            });
+        } else if (name === 'returndatetime') {
+            setEndDate(date);
+            setformvalues({
+                ...formvalues,
+                returndatetime: date,
+            });
+        }
+    };
+
     return (
         <Form className='mt-4' onSubmit={handleSubmit}>
             <Col>
                 <Form.Group controlId="formGridPhoneNo" className='d-flex' >
                     <span>
-                        <i class="fa-solid fa-circle-dot mt-3 me-2 border-0 pick-location"></i>
+                        <i className="fa-solid fa-circle-dot mt-3 me-2 border-0 pick-location"></i>
                     </span>
-                    <Form.Control
+                    <FormSelect
                         className="mt-1 border-0"
                         name="pickuplocation"
                         value={formvalues.pickuplocation}
                         onChange={handleChange}
-                        placeholder='Pick Up Location'
-                        type="search"
-                        required />
+                        type="text"
+                        required
+                        >
+                        <option value="">Select Pickup Location</option>
+                        <option>narhe</option>
+
+                    </FormSelect>
                 </Form.Group>
                 <hr className='ms-4' />
             </Col>
@@ -66,16 +87,21 @@ function OneWayReusable() {
             <Col className='mt-3'>
                 <Form.Group controlId="formGridPhoneNo" className='d-flex' >
                     <span>
-                        <i class="fa-solid fa-circle-dot mt-2 me-2">
-                        </i></span>
-                    <Form.Control
+                        <i className="fa-solid fa-circle-dot mt-2 me-2"></i>
+                    </span>
+                    <FormSelect
                         className="border-0"
                         name="droplocation"
                         value={formvalues.droplocation}
                         onChange={handleChange}
-                        type='search'
+                        type='text'
                         placeholder='Drop location'
-                        required />
+                        required
+                        >
+                        <option value="">Select Drop Location</option>
+                        <option>shivaji Nagar</option>
+
+                    </FormSelect>
                 </Form.Group>
             </Col>
             <hr className='ms-4' />
@@ -83,17 +109,25 @@ function OneWayReusable() {
             <Col className='mt-3'>
                 <Form.Group controlId="formGridPhoneNo" className='d-flex' >
                     <span>
-                        <i class="fa-solid fa-car-side mt-2"></i>
+                        <i className="fa-solid fa-car-side mt-2"></i>
                     </span>
-                    <Form.Control
+                    <FormSelect
                         type="text"
                         className="border-0"
                         placeholder='Type'
-                        name="type" value={formvalues.type}
-                        onChange={handleChange} required />
+                        name="type"
+                        value={formvalues.type}
+                        onChange={handleChange}
+                        required
+                        >
+                        <option value="">Type</option>
+                        <option>Round Trip</option>
+
+                    </FormSelect>
                 </Form.Group>
             </Col>
             <hr className='ms-4' />
+ 
 
             <Col>
                 <i className="far fa-calendar-alt mt-2 me-3"></i>
@@ -103,8 +137,8 @@ function OneWayReusable() {
                     showTimeSelect
                     dateFormat="MMMM d, yyyy h:mm aa"
                     className='border-0'
-                    onChange={date => setStartDate(date)}
-                    value={formvalues.calender}
+                    onChange={(date) => handleDateChange(date, 'journeydatetime')}
+                    value={formvalues.journeydatetime}
                     name='journeydatetime'
                     required
                 />
@@ -114,13 +148,13 @@ function OneWayReusable() {
             <Col>
                 <i className="far fa-calendar-alt mt-2 me-3"></i>
                 <DatePicker
-                    selected={startDate}
+                    selected={endDate}
                     placeholderText="Select Return Date and Time"
                     showTimeSelect
                     dateFormat="MMMM d, yyyy h:mm aa"
                     className='border-0'
-                    onChange={date => setStartDate(date)}
-                    value={formvalues.calender}
+                    onChange={(date) => handleDateChange(date, 'returndatetime')}
+                    value={formvalues.returndatetime}
                     name='returndatetime'
                     required
                 />
@@ -133,4 +167,4 @@ function OneWayReusable() {
     )
 }
 
-export default OneWayReusable
+export default RoundTrip

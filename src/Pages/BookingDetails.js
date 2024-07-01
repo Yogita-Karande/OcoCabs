@@ -1,14 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
+import { getUserBooking } from '../api/Api';
+import { getToken } from '../authentication_token/Token';
 
 function BookingDetails() {
+ 
   const navigate = useNavigate()
+  const [data, setData] = useState();
+  const [error, setError] = useState();
+  const [token, setToken] = useState();
 
-  const handleNavigate = () =>{
-    navigate ('/cancelbooking')
+ 
 
+  useEffect(() => {
+    setToken(getToken());
+}, []);
+
+
+  useEffect(() => {
+    setToken(getToken());
+}, []);
+
+  const getBookingDetails = async (e) => {
+    e.preventDefault();
+    try {
+      const submittedForm = await getUserBooking(token );
+
+      if (submittedForm.status === 200) {
+        setData(submittedForm);
+        
+      } else {
+        setError(submittedForm.message);
+      }
+    } catch (error) {
+      console.error('Error updating profile:', error);
+    }
   }
+
+  const handleNavigate= (()=>{
+
+  })
 
   return (
     <>
@@ -19,7 +51,7 @@ function BookingDetails() {
             <Card className='shadow-lg' >
               <Col className='text-center'>
                 <span >
-                  <i class="fa-solid fa-check mt-2 text-success"></i>
+                  <i className="fa-solid fa-check mt-2 text-success"></i>
                 </span>
                 <h5 className='text-success'>Booking successful!</h5>
                 <p className='text-success'>Congratulations your booking is done!</p>
@@ -62,9 +94,9 @@ function BookingDetails() {
               <h6>TRAVELER DETAILS</h6>
               <hr />
               <Col>
-                <h5><strong> <i class="fa-solid fa-user me-3"></i>Ravindra Mane,</strong> </h5>
-                <p><i class="fa-solid fa-envelope me-3"></i>ravindra234@gmail.com</p>
-                <p><i class="fa-solid fa-phone me-3"></i>+919309211604</p>
+                <h5><strong> <i className="fa-solid fa-user me-3"></i>Ravindra Mane,</strong> </h5>
+                <p><i className="fa-solid fa-envelope me-3"></i>ravindra234@gmail.com</p>
+                <p><i className="fa-solid fa-phone me-3"></i>+919309211604</p>
               </Col>
             </Col>
           </Row>

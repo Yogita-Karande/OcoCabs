@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Col, Form } from 'react-bootstrap';
+import { Col, Form, FormSelect } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 import { useNavigate } from 'react-router-dom';
-import { routeDetails } from '../../api/Api';
+import { getRouteDetails } from '../../api/Api';
 import { getToken } from '../../authentication_token/Token';
 
 function OneWay() {
-    const initialvalues = { pickuplocation: "", droplocation: "", journeydatetime: "", contact: "" }
+    const initialvalues = { pickuplocation: "", droplocation: "", type: "", time:'',  }
     const navigate = useNavigate()
 
     const [formvalues, setformvalues] = useState(initialvalues)
@@ -14,7 +14,15 @@ function OneWay() {
     const [token, setToken] = useState();
     const [data, setData] = useState();
     const [error, setError] = useState();
-    
+
+    const handleDateChange = (date) => {
+        setStartDate(date);     
+        setformvalues({
+                ...formvalues,
+                journeydatetime: date, // Update journeydatetime in form values           
+        });
+    };
+
     /** set token here */
 
     useEffect(() => {
@@ -28,13 +36,11 @@ function OneWay() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const submittedForm = await routeDetails('get-route-details', formvalues);
-            console.log(submittedForm);
-
+            const submittedForm = await getRouteDetails(formvalues);
+            console.log(submittedForm.data)
             if (submittedForm.status === 200) {
                 setData(submittedForm);
-                navigate('/search')
-                
+                navigate(`/one-way-cab/${formvalues.pickuplocation}/${formvalues.droplocation}/${formvalues.type}/${formvalues.journeydatetime}`)
             } else {
                 setError(submittedForm.message);
             }
@@ -43,23 +49,25 @@ function OneWay() {
         }
     }
 
-
     return (
         <Form className='mt-4' onSubmit={handleSubmit}>
             <Col>
                 <Form.Group controlId="formGridPhoneNo" className='d-flex' >
                     <span>
-                        <i class="fa-solid fa-circle-dot mt-3 me-2 border-0 pick-location"></i>
+                        <i className="fa-solid fa-circle-dot mt-3 me-2 border-0 pick-location"></i>
                     </span>
-                    <Form.Control
+                    <FormSelect
                         className="mt-1 border-0"
                         name="pickuplocation"
                         value={formvalues.pickuplocation}
                         onChange={handleChange}
                         placeholder='Pick Up Location'
-                        type="search"
+                        type="text"
                         required
-                    />
+                        >
+                        <option value="">Select Pickup Location</option>
+                        <option>Narhe</option>
+                    </FormSelect>
                 </Form.Group>
             </Col>
             <hr className='ms-4' />
@@ -67,31 +75,39 @@ function OneWay() {
             <Col className='mt-3'>
                 <Form.Group controlId="formGridPhoneNo" className='d-flex' >
                     <span>
-                        <i class="fa-solid fa-circle-dot mt-2 me-2"></i>
+                        <i className="fa-solid fa-circle-dot mt-2 me-2"></i>
                     </span>
-                    <Form.Control
+                    <FormSelect
                         className="border-0  "
                         name="droplocation"
                         value={formvalues.droplocation}
                         onChange={handleChange}
-                        type='search'
+                        type='text'
                         placeholder='Drop location'
-                        required />
+                        required >
+                        <option value="">Select Drop Location</option>
+                        <option>Shivaji Nagar</option>
+                    </FormSelect>
                 </Form.Group>
             </Col>
             <hr className='ms-4' />
 
             <Col className='mt-3'>
-            <Form.Group controlId="formGridPhoneNo" className='d-flex' >
+                <Form.Group controlId="formGridPhoneNo" className='d-flex' >
                     <span>
-                        <i class="fa-solid fa-car-side mt-2"></i>
+                        <i className="fa-solid fa-car-side mt-2"></i>
                     </span>
-                    <Form.Control
+                    <FormSelect
                         type="text"
                         className="border-0"
                         placeholder='Type'
-                        name="type" value={formvalues.type}
-                        onChange={handleChange} required />
+                        name="type"
+                        value={formvalues.type}
+                        onChange={handleChange}
+                        required>
+                        <option value="" className='text-muted'>Select Type</option>
+                        <option className='text-muted'>day rental</option>
+                    </FormSelect>
                 </Form.Group>
             </Col>
             <hr className='ms-4' />
@@ -104,9 +120,9 @@ function OneWay() {
                     showTimeSelect
                     dateFormat="MMMM d, yyyy h:mm aa"
                     className='border-0'
-                    onChange={date => setStartDate(date)}
-                    value={formvalues.calender}
-                    name='calender'
+                    value={formvalues.journeydatetime}
+                    onChange={handleDateChange}
+                    name='time'
                     required
                 />
             </Col>

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, Col, Container, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
-import { cancelBooking } from '../api/Api';
 import { getToken } from "../authentication_token/Token";
 
 function CancelBooking() {
@@ -20,16 +19,16 @@ function CancelBooking() {
     const handleCancelBooking = async (e) => {
         e.preventDefault();
         try {
-            const submittedForm = await cancelBooking('cancel-booking', token , formvalues);
-            console.log(submittedForm);
+            // const submittedForm = await cancelBooking('cancel-booking', token, formvalues);
+            // console.log(submittedForm);
 
-            if (submittedForm.status === 200) {
-                // setSuccessUpdate(submittedForm.message);
-                navigate('/')
-            } else {
-                // show errors 
-                // setErrorMessage(submittedForm.message);
-            }
+            // if (submittedForm.status === 200) {
+            //     // setSuccessUpdate(submittedForm.message);
+            //     navigate('/')
+            // } else {
+            //     // show errors
+            //     // setErrorMessage(submittedForm.message);
+            // }
         } catch (error) {
             console.error('Error updating profile:', error);
             // Handle error - maybe show an error message to the user

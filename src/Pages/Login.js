@@ -1,26 +1,29 @@
 import React, { useState } from 'react';
 import { Card, Col, Container, Form, Row } from 'react-bootstrap';
-import { verifylogin } from '../api/Api';
-import { setToken } from '../authentication_token/Token';
+import { useNavigate } from 'react-router';
+import { receiveotp } from '../api/Api';
 
 function Login() {
-  const initialvalues = { number: "" }
+  const initialvalues = { mobile_no: "" }
   const [formvalues, setformvalues] = useState(initialvalues)
   const [pageError, setPageError] = useState('');
-  
+  const navigate = useNavigate()
+
   const handleChange = (e) => {
-    setformvalues(prevValues => ({ ...prevValues, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setformvalues({
+        ...formvalues,
+        [name]: value,
+    });
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formvalues)
     try {
-      const submittedForm = await verifylogin(formvalues);
-
+      const submittedForm = await receiveotp(formvalues);
       if (submittedForm.status === 200) {
-        setToken(submittedForm.data.token); // Set the token received from the backend
-        console.log('Logged in and token set!');
+        navigate(`/verify-number/${formvalues.mobile_no}/${submittedForm.data.message}`);
+        console.log('verify-number!');
       } else {
         setPageError(submittedForm.message);
       }
@@ -29,8 +32,6 @@ function Login() {
       console.error('Login error:', error);
     }
   }
-
-  const token = setToken()
 
   return (
     <Container className="min-vh-100 pt-5 mt-5">
@@ -41,7 +42,7 @@ function Login() {
               <h1 className='fs-3 text-center mt-3 text-muted'>LOGIN</h1>
               <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="exampleForm.ControlInput1" >
-                  <Form.Control type="tel" placeholder="Enter Mobile Number" className='login mt-4 mx-auto' name="number" required value={formvalues.number} onChange={handleChange} />
+                  <Form.Control type="tel" placeholder="Enter Mobile Number" className='login mt-4 mx-auto' name="mobile_no" required value={formvalues.mobile_no} onChange={handleChange} />
                 </Form.Group>
                 <Col className=" d-grid gap-2 text-center login-button mt-4 mx-lg-5" rounded>
                   <button size="md" type='submit' className='btn btn-md btn-block text-white'> Login </button>

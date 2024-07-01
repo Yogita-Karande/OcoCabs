@@ -1,16 +1,45 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button, Col, Container, Form, FormLabel, Image, Row } from 'react-bootstrap';
-import { getProfile, updateProfile } from '../api/Api';
+import { getProfile, updateProfile, uploadProfilePhoto } from '../api/Api';
 import { getToken } from '../authentication_token/Token';
 
 function Update_Profile() {
 
-    const [updateValues, setUpdateValues] = useState({ fullname: "", email: "", token: "", });
-    const [errorMessage, setErrorMessage] = useState('');
+    const [updateValues, setUpdateValues] = useState({ name: "", email: "", mobile_no: "" });
     const [successUpdate, setSuccessUpdate] = useState('');
     const [token, setToken] = useState('');
     const [getData, setGetData] = useState();
-    const [uploadProfile, setUploadProfile] = useState();
+    const [preview, setPreview] = useState('');
+    const [uploadStatus, setUploadStatus] = useState('');
+    const fileInputRef = useRef(null);
+
+    const handleFileChange = async (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+
+            // Upload the file automatically
+            const formData = new FormData();
+            formData.append('upload-image', file);
+
+            try {
+                const submittedForm = await uploadProfilePhoto(token);
+                console.log(token)
+                console.log(submittedForm)
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    }
+
+    const handleImageClick = () => {
+        fileInputRef.current.click();
+    };
+
 
     useEffect(() => {
         setToken(getToken());
@@ -19,12 +48,8 @@ function Update_Profile() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const getProfileData = await getProfile('get-profile', token);
+                const getProfileData = await getProfile(token);
                 setGetData(getProfileData);
-
-                const uploadProfilePhoto = await uploadProfile('upload-profile', token);
-                setUploadProfile(uploadProfilePhoto);
-
             } catch (error) {
                 console.error('Error fetching state data:', error);
             }
@@ -40,20 +65,13 @@ function Update_Profile() {
 
     const handleUpdateSubmit = async (e) => {
         e.preventDefault();
-        console.log(updateValues)
         try {
-            const submittedForm = await updateProfile('update-profile', updateValues);
-            console.log(submittedForm);
-
+            const submittedForm = await updateProfile(updateValues, token);
             if (submittedForm.status === 200) {
                 setSuccessUpdate(submittedForm.message);
-            } else {
-                // show errors 
-                setErrorMessage(submittedForm.message);
             }
         } catch (error) {
             console.error('Error updating profile:', error);
-            // Handle error - maybe show an error message to the user
         }
     }
 
@@ -64,28 +82,38 @@ function Update_Profile() {
                 <Row className='justify-content-center mx-auto'>
                     <Col lg={5} className='border px-4'>
                         <Form onSubmit={handleUpdateSubmit}>
-                            <Col className='profile-image mt-3'>
+                            <Col className="mb-3 mt-4 text-center">
                                 <Image
-                                    src='./assets/images/form_bg_image.jpg'
+                                    src={preview || './assets/images/form_bg_image.jpg'}
                                     roundedCircle
                                     width='200px'
                                     height='200px'
-                                    onChange={handleUpdate}
-                                    name="profileimage">
-                                </Image><br/>
+                                    alt="Profile"
+                                    onClick={handleImageClick}
+                                    style={{ cursor: 'pointer' }}
+                                />
+                                <br />
+                                <Form.Control
+                                    type='file'
+                                    name="upload-image"
+                                    ref={fileInputRef}
+                                    onChange={handleFileChange}
+                                    style={{ display: 'none' }}
+
+                                />
                             </Col>
                             <hr />
                             <FormLabel>Name</FormLabel>
                             <Form.Control
                                 placeholder='Enter Your Name'
-                                type='text' name="fullname"
+                                type='text' name="name"
                                 onChange={handleUpdate}
                             />
                             <FormLabel className='mt-4'>Number</FormLabel>
                             <Form.Control
                                 placeholder='Enter Your Number'
                                 type="tel"
-                                name="mobilenumber"
+                                name="mobile_no"
                                 onChange={handleUpdate}
                             />
                             <FormLabel className='mt-4'>Email</FormLabel>
@@ -96,7 +124,7 @@ function Update_Profile() {
                                 onChange={handleUpdate}
                             />
                             <Col className="d-grid gap-2 my-5">
-                                <Button variant="primary" size="md" type='submit'>
+                                <Button variant="primary" size="md" type='update'>
                                     Update
                                 </Button>
                             </Col>

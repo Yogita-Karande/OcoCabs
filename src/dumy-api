@@ -1,0 +1,438 @@
+import axios from "axios";
+
+let BASE_URL = 'https://www.ococabs.com/web-api';
+
+if(typeof BASE_URL == undefined) {
+    BASE_URL = '192.168.0.102/ococabs.com/web-api';
+}
+
+const getResponse = (data) => {
+    // console.log(data)
+    if (data.config.data == 200) {
+        if (typeof data.config.data != "undefined") {
+            return data.data.data;
+        }
+    }
+    return data.data.message;
+}
+
+
+export const makeEnquiry = async (postData) => {
+    try {
+        postData.api = 'create-enquiry'
+        const response = await axios.post(BASE_URL, postData, {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
+        console.log(response)
+        return getResponse(response);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+/*****
+* Used to get page content
+* @postData -> form data ( api, page)
+*/
+
+export const getPageContent = async (page) => {
+    try {
+        const postData = {
+            api: 'get-policies',
+            page: page
+        };
+        const response = await axios.get(BASE_URL, {
+            params: postData
+        });
+        console.log(response.data.data)
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        return undefined;
+    }
+}
+
+/*****
+ * Used to add contact us page
+ * @postData -> form data (name, email, phone, message, type , subject)
+ */
+
+// export const contactEnquiry = async (postData) => {
+//     try {
+//         postData.api = 'create-enquiry'
+//         const response = await axios.post(BASE_URL, postData, {
+//             // headers: {
+//             //   'Content-Type': 'application/x-www-form-urlencoded'
+//             // }
+//         });
+//         console.log(getResponse(response))
+//         return getResponse(response);
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+
+/* Used to send Otp
+* @postData -> form data (api, mobile_no);
+*/
+
+export const receiveotp = async (postData) => {
+    try {
+        postData.api = 'send-otp'
+        const response = await axios.post(BASE_URL, postData, {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
+        return (response);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// export const sendOtp = async (postData) => {
+//     try {
+//         postData.api = 'send-otp';
+//         const response = await axios.post(BASE_URL, postData)
+//         console.log(response.data)
+//         return response
+//     } catch (error) {
+//         console.log(error);
+//         return undefined;
+//     }
+// }
+
+/*****
+* Used to verify Number
+* @postData -> form data ( api, otp)
+*/
+
+export const verifyOtp = async (postData) => {
+    try {
+        postData.api = 'verify-login'
+        const response = await axios.post(BASE_URL, postData, {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
+        return (response);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+/*****
+* Used to verify login
+* @postData -> form data ( api, token, otp , fcm)
+*/
+
+// export const verifylogin = async (postData) => {
+//     try {
+//         postData.api = 'verify-login'
+//         const response = await axios.post("http://ococabs.com/web-api",{
+//             headers: {
+//                 'Content-Type': 'application/x-www-form-urlencoded'
+//             },
+//             params:postData
+//         });
+//         console.log(response)
+//         return (response)
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+
+/*****
+ * Used to testmonials
+ * @postData -> form data (api)
+ */
+
+export const getTestmonials = async () => {
+    try {
+        const response = await axios.get(BASE_URL);
+        let data = response.data.data;
+        return data;
+    } catch (error) {
+        console.error(error);
+        return undefined;
+    }
+}
+
+/*****
+ * Used to add updata data
+ * @postData -> form data(api , token)
+ */
+
+export const updateProfile = async (api, token, updateValues) => {
+    try {
+        const postData = {
+            api: api,
+            token: token,
+            updateValues: { ...updateValues }
+        }
+        const response = await axios.put(BASE_URL, postData, {
+        });
+        return getResponse(response);
+    } catch (error) {
+        console.log(error);
+        return undefined;
+    }
+}
+
+/*****
+ * Used to get rental package
+ * @postData -> form data (api)
+ */
+
+export const getRentalPackage = async (page) => {
+    try {
+        const postData = {
+            api:'get-rental-package',
+            page: page
+        };
+        const response = await axios.post(BASE_URL, postData, {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
+        console.log(response.data.data);
+        return response.data.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+/*****
+ * Used to get notifications
+ * @postData -> form data (api , token )
+ */
+
+export const getNotifications = async (api, token) => {
+    try {
+        const postData = {
+            api: api,
+            token: token
+        }
+        const response = await axios.put(BASE_URL, postData, {
+        });
+        return getResponse(response);
+    } catch (error) {
+        console.log(error);
+        return undefined;
+    }
+}
+
+/*****
+ * Used to get Profile
+ * @postData -> form data (api , token )
+ */
+
+export const getProfile = async (api, token) => {
+    try {
+        const postData = {
+            api: api,
+            token: token
+        }
+        const response = await axios.put(BASE_URL, postData, {
+        });
+        return getResponse(response);
+    } catch (error) {
+        console.log(error);
+        return undefined;
+    }
+}
+
+/*****
+ * Used to upload profile photo 
+ * @postData -> form data (api , token )
+ */
+
+export const uploadProfile = async (api, token) => {
+    try {
+        const postData = {
+            api: api,
+            token: token
+        }
+        const response = await axios.put(BASE_URL, postData, {
+        });
+        return getResponse(response);
+    } catch (error) {
+        console.log(error);
+        return undefined;
+    }
+}
+
+/*****
+ * Used to get route Details
+ * @postData -> form data (api , token)
+ */
+
+export const getRouteDetails = async (postData) => {
+    try {
+        postData.api = "get-route-details"
+        const response = await axios.post(BASE_URL, {
+            params: postData
+        });
+        console.log(postData)
+        console.log(response.data)
+        return getResponse(response);
+    } catch (error) {
+        console.log(error);
+        return undefined;
+    }
+}
+
+/*****
+ * Used to add get route details for one way
+ * @postData -> form data(api , token , destination , time , type)
+ */
+
+export const oneWayRouteDetails = async (postData) => {
+    try {
+        postData.api = "get-route-details"
+        const response = await axios.post(BASE_URL, {
+            params: postData
+        });
+        console.log(postData)
+        console.log(response.data)
+        return getResponse(response);
+    } catch (error) {
+        console.log(error);
+        return undefined;
+    }
+}
+
+/*****
+ * Used to add get route details for round trip
+ * @postData -> form data(api , token , destination , time , ret_time , type)
+ */
+
+export const roundTripRouteDetails = async (postData) => {
+    try {
+        postData.api = "get-route-details"
+        const response = await axios.post(BASE_URL, {
+            params: postData
+        });
+        console.log(postData)
+        console.log(response.data)
+        return getResponse(response);
+    } catch (error) {
+        console.log(error);
+        return undefined;
+    }
+}
+
+/*****
+ * Used to add get route details for day rental
+ * @postData -> form data(api , token , destination , time , type)
+ */
+
+export const dayRentalRouteDetails = async (api, token, formvalues) => {
+    try {
+        const postData = {
+            api: api,
+            token: token,
+            formvalues: { ...formvalues }
+        }
+        const response = await axios.put(BASE_URL, postData, {
+        });
+        return getResponse(response);
+    } catch (error) {
+        console.log(error);
+        return undefined;
+    }
+}
+
+/*****
+ * Used to create booking
+ * @postData -> form data(api , token , source, destination, time , ret_time, type , car_type)
+ */
+
+export const createBooking = async (api, token, formvalues) => {
+    try {
+        const postData = {
+            api: api,
+            token: token,
+            formvalues: { ...formvalues }
+        }
+        const response = await axios.put(BASE_URL, postData, {
+        });
+        return getResponse(response);
+    } catch (error) {
+        console.log(error);
+        return undefined;
+    }
+}
+
+/*****
+ * Used to get user boookings
+ * @postData -> form data (api , token )
+ */
+
+export const getUserBooking = async (api, token) => {
+    try {
+        const postData = {
+            api: api,
+            token: token
+        }
+        const response = await axios.put(BASE_URL, postData, {
+        });
+        return getResponse(response);
+    } catch (error) {
+        console.log(error);
+        return undefined;
+    }
+}
+
+/*****
+ * Used to get boooking Details
+ * @postData -> form data (api , token )
+ */
+
+export const getBookingDetails = async (api, token) => {
+    try {
+        const postData = {
+            api: api,
+            token: token
+        }
+        const response = await axios.put(BASE_URL, postData, {
+        });
+        return getResponse(response);
+    } catch (error) {
+        console.log(error);
+        return undefined;
+    }
+}
+
+/*****
+ * Used to create booking
+ * @postData -> form data(api , token , source, destination, time , ret_time, type , car_type)
+ */
+
+export const cancelBooking = async (api, token, formvalues) => {
+    try {
+        const postData = {
+            api: api,
+            token: token,
+            formvalues: { ...formvalues }
+        }
+        const response = await axios.put(BASE_URL, postData, {
+        });
+        return getResponse(response);
+    } catch (error) {
+        console.log(error);
+        return undefined;
+    }
+}
+
+
+
+
+<option value="">Rental Package</option>
+{
+    rentalPackage && (
+        rentalPackage.map((item, index) => (
+            <option className="text-dark" key={index} value={index.id}>{item.name}</option>
+        )))}
