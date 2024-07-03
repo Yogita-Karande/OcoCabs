@@ -220,6 +220,12 @@ input, button, select, optgroup, textarea {
     background-color: #000;
     height: 430px;
   }
+  .short-about {
+    display: flex;
+  }
+  .footer{
+    display: flex;
+  }
 }
 
 .content-margin2 {
@@ -295,6 +301,7 @@ input, button, select, optgroup, textarea {
     margin-left: 10px;
     margin-top: 20px;
   }
+
 }
 
 /* Blogs */
@@ -433,4 +440,9 @@ Image:hover {
 
 .verification-success {
   margin-top: 150px;
+}
+
+.notification-icon {
+  margin-left: 1070px;
+  margin-top: 20px;
 }

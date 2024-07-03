@@ -47,7 +47,6 @@ export const getPageContent = async (page) => {
         const response = await axios.get(BASE_URL, {
             params: postData
         });
-        console.log(response.data.data)
         return response.data;
     } catch (error) {
         console.log(error);
@@ -87,7 +86,6 @@ export const verifyOtp = async (postData) => {
               'Content-Type': 'application/x-www-form-urlencoded'
             }
         });
-        console.log (response.data);
         return (response);
     } catch (error) {
         console.log(error);
@@ -270,7 +268,29 @@ export const getUserBooking = async (token) => {
               'Content-Type': 'application/x-www-form-urlencoded'
             }
         });
-        console.log(response.data)
+        return (response.data);
+    } catch (error) {
+        console.log(error);
+    }
+}   
+
+/*****
+ * Used to upload profile
+ * @postData -> form data (api , token )
+ */
+
+export const cancelBooking = async (token , booking_id) => {
+    try {
+        const postData = {
+            api:'cancel-booking',
+            booking_id: booking_id,
+            token : token
+        };
+        const response = await axios.post(BASE_URL, postData, {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
         return (response.data);
     } catch (error) {
         console.log(error);

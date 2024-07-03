@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { Card, Col, Container } from "react-bootstrap";
 import { getNotifications } from '../api/Api';
-import { getToken } from "../authentication_token/Token";
+import { useAuth } from "../authentication_token/AuthProvider";
 
 function Notification() {
     const [token, setToken] = useState();
     const [notification, setNotification] = useState();
 
-    useEffect(() => {
-        setToken(getToken());
-    }, []);
+    // useEffect(() => {
+    //     const tokenFromStorage = localStorage.getItem('token');
+    //     setToken(tokenFromStorage);
+    // }, []);
 
     console.log(notification)
     useEffect(() => {
@@ -17,7 +18,6 @@ function Notification() {
             try {
                 const notificationData = await getNotifications(token);
                 setNotification(notificationData)
-                console.log(notificationData)
             }
             catch (error) {
                 console.log(error)
@@ -26,6 +26,8 @@ function Notification() {
         fetchData()
     }, [])
 
+    const {storeToken} = useAuth();
+
     return (
         <Container className="min-vh-100">
             <h1 className='my-booking  text-center text-muted fs-2 my-4'>NOTIFICATIONS</h1>
@@ -33,7 +35,6 @@ function Notification() {
                 <Col>
                     {notification && (
                         notification.map((item, index) => {
-                            console.log(item.notification);
                             return (
                                 <Card key={index} className="mx-3 text-muted my-3">
                                     <ul>

@@ -20,7 +20,7 @@ function Termsandcondition() {
   return (
     <>
       <Container className='mb-5'>
-      <h1 className='contact-text text-muted text-center py-4 fw-bold fs-2'> TERMS AND CONDITIONS</h1>
+        <h1 className='contact-text text-muted text-center py-4 fw-bold fs-2'> TERMS AND CONDITIONS</h1>
           <p dangerouslySetInnerHTML={{ __html: getAboutData}}></p>
       </Container>
     </>

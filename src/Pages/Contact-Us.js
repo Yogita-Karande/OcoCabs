@@ -122,7 +122,6 @@ function ContactUs() {
                 <button size="md" className='contact-input contact-button btn btn-md btn-block' type='submit' > Send Message </button>
               </Col>)
             }
-
             <p >{successMessage && (
               <span className='text-muted fw-bold'>{successMessage}</span>
             )}</p>

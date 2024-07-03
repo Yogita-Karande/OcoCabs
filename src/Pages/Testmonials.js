@@ -37,8 +37,8 @@ function Testmonials() {
                                     {[...Array(5)].map((star, i) => (
                                         <span key={i} className={`fa fa-star ${i < testimonial.rating ? 'checked' : ''} star`}></span>
                                     ))}
-                                    <p className='content-margin2 text-white'>{testimonial.message}</p>
-                                    <h3 className='text-center text-white content-margin'>{testimonial.name}</h3>
+                                    <p className='content-margin2 text-white mx-4 mx-lg-0 '>{testimonial.message}</p>
+                                    <h3 className='text-center text-white content-margin  mb-5 mb-lg-0'>{testimonial.name}</h3>
                                     
                                 </Col>
                             </Row>

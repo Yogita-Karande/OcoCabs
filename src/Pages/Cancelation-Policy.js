@@ -10,7 +10,6 @@ function CancelationPolicy() {
     async function fetchData() {
       try {
         const pageData = await getPageContent('8');
-        // console.log(pageData)
         setAboutData(pageData.data);
       } catch (error) {
         console.error('Error fetching state data:', error);

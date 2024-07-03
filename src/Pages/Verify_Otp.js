@@ -1,44 +1,39 @@
 import { useState } from "react";
 import { Card, Col, Container, Form, Row } from 'react-bootstrap';
-import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { verifyOtp } from "../api/Api";
-import { setToken } from "../authentication_token/Token";
+import { useAuth } from "../authentication_token/AuthProvider";
 
 function Verify_Otp() {
 
   const { mobile_no, message } = useParams();
   const data = { mobile_no: mobile_no, otp: "", fcm: "" }
-  const [formData, setformData] = useState(data)
-  const [message1, setMessage1] = useState('')
-  const navigate = useNavigate()
+  const [formData, setformData] = useState(data);
+  const [error , setError] = useState();
+  const navigate = useNavigate();
+  const {storeToken } = useAuth();
 
   const handleChange = (e) => {
     setformData({ ...formData, [e.target.name]: e.target.value });
-  }
-
- const dispatch =  useDispatch();
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const submittedForm = await verifyOtp(formData);
-
     try {
       if (submittedForm.data.status === 200) {
-        dispatch(setToken(submittedForm.data.data));
-        console.log(submittedForm.data.data);
-        navigate('/verification-success');
+        // localStorage.setItem('token', submittedForm.data.data);
+        storeToken(submittedForm.data.data)
+        navigate('/verification-success')
       } else {
-        setMessage1(submittedForm.data.message);
         console.log(submittedForm.data.message);
+        setError(submittedForm.data.message);
       }
     } catch (error) {
       console.error('Error:', error);
     }
   }
-
-  const token = setToken()
 
   return (
     <Container className="min-vh-100 pt-5 mt-5">
@@ -72,7 +67,7 @@ function Verify_Otp() {
                 <Col className=" d-grid gap-2 text-center login-button mt-4 mx-lg-5" rounded>
                   <button size="md" type='submit' className='btn btn-md btn-block text-white'> Verify </button>
                 </Col>
-                <p className='text-danger  text-center mt-3'>{message1}</p>
+                <p className='text-danger  text-center mt-3'>{error}</p>
               </Card.Body>
             </Card>
           </Form >

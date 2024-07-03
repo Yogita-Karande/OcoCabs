@@ -7,11 +7,11 @@ import { getToken } from '../../authentication_token/Token';
 
 function RoundTrip() {
 
-    const initialvalues = { pickuplocation: "", droplocation: "", type: "", journeydatetime: null, returndatetime: null , }
+    const initialvalues = { pickuplocation: "", droplocation: "", type: "", time: "", ret_time: "", }
     const navigate = useNavigate()
     const [formvalues, setformvalues] = useState(initialvalues)
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
     const [token, setToken] = useState();
     const [data, setData] = useState();
     const [error, setError] = useState();
@@ -32,11 +32,12 @@ function RoundTrip() {
             const submittedForm = await getRouteDetails(formvalues);
             console.log(submittedForm.data);
 
-            if (submittedForm.status === 200) {
+            if (submittedForm.data.status === 200) {
                 setData(submittedForm);
-                navigate(`/round-trip-cab/${formvalues.pickuplocation}/${formvalues.droplocation}/${formvalues.type}/${formvalues.journeydatetime}/${formvalues.returndatetime}`)
+                navigate(`/round-trip-cab/${formvalues.pickuplocation}/${formvalues.droplocation}/${formvalues.type}/${formvalues.time}/${formvalues.ret_time}`)
             } else {
-                setError(submittedForm.message);
+                setError(submittedForm.data.message);
+                alert(submittedForm.data.message);
             }
         } catch (error) {
             console.error('Error updating profile:', error);
@@ -44,19 +45,19 @@ function RoundTrip() {
 
     }
 
-    const handleDateChange = (date,name) => {
-           
-        if (name === 'journeydatetime') {
+    const handleDateChange = (date, name) => {
+
+        if (name === 'time') {
             setStartDate(date);
             setformvalues({
                 ...formvalues,
-                journeydatetime: date,
+                time: date,
             });
-        } else if (name === 'returndatetime') {
+        } else if (name === 'ret_time') {
             setEndDate(date);
             setformvalues({
                 ...formvalues,
-                returndatetime: date,
+                ret_time: date,
             });
         }
     };
@@ -75,7 +76,7 @@ function RoundTrip() {
                         onChange={handleChange}
                         type="text"
                         required
-                        >
+                    >
                         <option value="">Select Pickup Location</option>
                         <option>narhe</option>
 
@@ -97,7 +98,7 @@ function RoundTrip() {
                         type='text'
                         placeholder='Drop location'
                         required
-                        >
+                    >
                         <option value="">Select Drop Location</option>
                         <option>shivaji Nagar</option>
 
@@ -119,16 +120,15 @@ function RoundTrip() {
                         value={formvalues.type}
                         onChange={handleChange}
                         required
-                        >
+                    >
                         <option value="">Type</option>
-                        <option>Round Trip</option>
-
+                        <option className='text-muted'>One Way</option>
+                        <option className='text-muted'>Day Rental</option>
+                        <option className='text-muted'>Round Trip</option>
                     </FormSelect>
                 </Form.Group>
             </Col>
             <hr className='ms-4' />
- 
-
             <Col>
                 <i className="far fa-calendar-alt mt-2 me-3"></i>
                 <DatePicker
@@ -138,13 +138,12 @@ function RoundTrip() {
                     dateFormat="MMMM d, yyyy h:mm aa"
                     className='border-0'
                     onChange={(date) => handleDateChange(date, 'journeydatetime')}
-                    value={formvalues.journeydatetime}
-                    name='journeydatetime'
+                    value={formvalues.time}
+                    name='time'
                     required
                 />
             </Col>
             <hr className='ms-4' />
-
             <Col>
                 <i className="far fa-calendar-alt mt-2 me-3"></i>
                 <DatePicker
@@ -154,8 +153,8 @@ function RoundTrip() {
                     dateFormat="MMMM d, yyyy h:mm aa"
                     className='border-0'
                     onChange={(date) => handleDateChange(date, 'returndatetime')}
-                    value={formvalues.returndatetime}
-                    name='returndatetime'
+                    value={formvalues.ret_time}
+                    name='ret_time'
                     required
                 />
             </Col>

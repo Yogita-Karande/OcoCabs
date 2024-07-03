@@ -10,7 +10,6 @@ function RefundPolicy() {
       try {
         const pageData = await getPageContent('7');
         setAboutData(pageData.data );
-        // console.log(pageData)s
       } catch (error) {
         console.error('Error fetching state data:', error);
       }

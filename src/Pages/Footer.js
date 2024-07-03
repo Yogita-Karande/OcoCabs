@@ -19,7 +19,7 @@ function Footer() {
       <Row>
       <Col className='list-style p-4 text-center bg-dark text-white'>
         <h5 className='mb-4'>SUPPORT NUMBER (24X7)</h5>
-        <Col className='d-flex footer mb-2 gap-2'>
+        <Col className='footer mb-2 gap-2'>
           <NavLink className='nav-link with-border' to='tel:+918421777463'>New Booking: +918421777463</NavLink>
           <NavLink className='nav-link with-border' to='tel:+918421777463'>Existing Booking: +918421777463</NavLink>
           <NavLink className='nav-link with-border' to='tel:+918421994130'>Attach Taxi/Cab: +918421994130</NavLink>
@@ -33,7 +33,7 @@ function Footer() {
           <NavLink className='nav-link' to='https://in.linkedin.com/company/akshada-info-system'><i className="fa-brands fa-linkedin" style={{ fontSize: '35px' }}></i></NavLink>
           <NavLink className='nav-link' to='https://www.youtube.com/@ococabs9550'><i className="fa-brands fa-square-youtube" style={{ fontSize: '35px' }}></i></NavLink>
         </Col>
-        <Col className='d-flex  footer gap-2'>
+        <Col className=' footer gap-2'>
           <NavLink className='nav-link with-border' to='terms-and-condition'>Terms & Conditions</NavLink>
           <NavLink className='nav-link with-border' to='privacy-policy'>Privacy Policy</NavLink>
           <NavLink className='nav-link with-border' to='refund-policy'>Refund Policy</NavLink>

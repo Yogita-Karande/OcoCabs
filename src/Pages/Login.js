@@ -12,8 +12,8 @@ function Login() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setformvalues({
-        ...formvalues,
-        [name]: value,
+      ...formvalues,
+      [name]: value,
     });
   }
 
@@ -23,7 +23,6 @@ function Login() {
       const submittedForm = await receiveotp(formvalues);
       if (submittedForm.status === 200) {
         navigate(`/verify-number/${formvalues.mobile_no}/${submittedForm.data.message}`);
-        console.log('verify-number!');
       } else {
         setPageError(submittedForm.message);
       }

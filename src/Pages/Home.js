@@ -29,7 +29,9 @@ function Home() {
         {/* Find Cab page section */}
 
         <Col lg={4} md={6} className='bg-dark'>
-          <Card className='bg-form margin-right position-absolute top-0 end-0'>
+         
+       
+          <Card className='bg-form margin-right position-absolute top-0 end-0' >
             <Card.Body>
               <Nav defaultActiveKey="1" className='Nav-Link'>
                 <Nav.Item >
@@ -52,7 +54,7 @@ function Home() {
 
       {/* Short About Section*/}
 
-      <Row className="mb-3 short-about">
+      <Col className="mb-3 short-about">
         <Col data-aos="fade-right">
           <h1 className='text-center about mb-3 mt-lg-5 contact-text'>ABOUT US</h1>
             <p className='ms-4 me-4'>we are India's leader for taxi travels provider. we are promise you safe ,reliable and cost-effective inter-city taxis all over Maharashtra and India. our mission is to simplify outstation travel for all Indians and we welcome your suggestions for improvement always.' Ococabs 'vision is to enable easier, safer and reliable outstation travel acro...
@@ -61,7 +63,7 @@ function Home() {
             <NavLink onClick={navigateTo}>Read More</NavLink>
           </Col>
         </Col>
-        <Col>
+        <Col className='mx-4 mx-lg-0'>
           <h2 className='color m-4 text-center contact-text mt-lg-5'> WHY CHOOSE US ?</h2>
           <Col >
             <h4><i className="fas fa-arrow-down me-3"></i>Less Price</h4>
@@ -76,7 +78,7 @@ function Home() {
             <p>Our drivers and partners are well mannered and customer friendly in nature.</p>
           </Col>
         </Col>
-      </Row>
+      </Col>
 
       {/*  Why Choose Us Section */}
 

@@ -4,4 +4,48 @@ complete API
 
 Proxy 
 
-meanig : to represent someone
+meaning : to represent someone
+
+------------------------------------------
+
+today work 
+
+token set in redux 
+verify otp page 
+header
+notification
+day rental
+round  trip
+one way
+
+***************************
+
+store token in local storage and session storage
+
+local storage availble in application tab on browser
+
+-> problem my account page show delay
+-> page not nevigate properly
+
+-> add user type of cab that type of can will show on page
+
+Search page  -> Car Details ->
+
+Car Name
+price
+
+**********************
+
+get user booking 
+
+no booking found  - 
+
+its is for create booking
+
+get-booking-Details
+
+use for show booking details 
+
+cancel booking 
+
+for bokking cancel
