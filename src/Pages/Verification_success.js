@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
+import { useAuth } from '../authentication_token/AuthProvider';
 
 function Verification_success() {
   const  [token , setToken] =useState()
   const navigate = useNavigate()
+  const {getToken} = useAuth()
+  // useEffect(() => {
+  //   const tokenFromStorage = localStorage.getItem('token');
+  //   setToken(tokenFromStorage);
+  // }, []);
 
   useEffect(() => {
-    const tokenFromStorage = localStorage.getItem('token');
-    setToken(tokenFromStorage);
-  }, []);
+    const mytoken = getToken();
+    console.log('Token:', mytoken);
+    setToken(mytoken)
+    // Use the token as needed
+}, [getToken]);
 
   console.log(token)
 

@@ -2,22 +2,26 @@ import { useEffect, useState } from 'react';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import Navbar from 'react-bootstrap/Navbar';
 import { useNavigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../authentication_token/AuthProvider';
 
 function Header() {
     const navigate = useNavigate();
     const [token, setToken] = useState();
+    const { getToken } = useAuth()
+    const {removeToken}= useAuth()
 
     useEffect(() => {
-        const tokenFromStorage = localStorage.getItem('token');
-        setToken(tokenFromStorage);
-    }, []);
+        const mytoken = getToken();
+        console.log('Token:', mytoken);
+        setToken(mytoken)
+    }, [getToken]);
 
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        setToken(null);
+        removeToken();
         navigate('/login');
     }
 
@@ -41,11 +45,10 @@ function Header() {
                                 <NavLink className='nav-link my-account-dropdown with-border' to="my-home">My Account</NavLink>
                                 <Dropdown.Toggle split className='my-account-dropdown btn btn-dark' id="dropdown-my-account-basic" />
                                 <Dropdown.Menu>
-                                    <Nav.Link as={NavLink} className='header-nav' to="bookingdetails">My Bookings</Nav.Link>
-                                    <Nav.Link as={NavLink} className='header-nav' to="update-profile">Update Profile</Nav.Link>
-                                    <Nav.Link as={NavLink} className='header-nav' to="bookingdetails">My Bookings</Nav.Link>
-                                    <Nav.Link as={NavLink} className='header-nav' to="notification">Notification</Nav.Link>                                 
-                                    <Nav.Link as={NavLink} className='header-nav' onClick={handleLogout}>Logout</Nav.Link>
+                                    <NavDropdown.Item as={NavLink} to="update-profile">Update Profile</NavDropdown.Item>
+                                    <NavDropdown.Item as={NavLink} to="bookingdetails">My Bookings</NavDropdown.Item>
+                                    <NavDropdown.Item as={NavLink} to="notification">Notification</NavDropdown.Item>
+                                    <NavDropdown.Item onClick={handleLogout}> Logout</NavDropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         )}

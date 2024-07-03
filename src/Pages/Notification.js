@@ -6,18 +6,20 @@ import { useAuth } from "../authentication_token/AuthProvider";
 function Notification() {
     const [token, setToken] = useState();
     const [notification, setNotification] = useState();
+    const { getToken } = useAuth()
 
-    // useEffect(() => {
-    //     const tokenFromStorage = localStorage.getItem('token');
-    //     setToken(tokenFromStorage);
-    // }, []);
+    useEffect(() => {
+        const mytoken = getToken();
+        console.log('Token:', mytoken);
+        setToken(mytoken)
+    }, [getToken]);
 
-    console.log(notification)
     useEffect(() => {
         async function fetchData() {
             try {
                 const notificationData = await getNotifications(token);
                 setNotification(notificationData)
+                console.log(notificationData)
             }
             catch (error) {
                 console.log(error)
@@ -26,12 +28,11 @@ function Notification() {
         fetchData()
     }, [])
 
-    const {storeToken} = useAuth();
-
     return (
         <Container className="min-vh-100">
             <h1 className='my-booking  text-center text-muted fs-2 my-4'>NOTIFICATIONS</h1>
             <Col lg={8} className="mx-auto">
+
                 <Col>
                     {notification && (
                         notification.map((item, index) => {

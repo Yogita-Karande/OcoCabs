@@ -39,7 +39,6 @@ function App() {
           <Route path='privacy-policy' element={<PrivacyPolicy />} />
           <Route path='refund-policy' element={<RefundPolicy />} />
           <Route path='cancelation-policy' element={<CancelationPolicy />} />
-          {/* <Route path='my-bookings' element={<My_Bookings />} /> */}
           <Route path='update-profile' element={<Update_Profile />} />
           <Route path="/verify-number/:mobile_no/:message" element={<Verify_Otp />} />
           <Route path='testmonials' element={<Testmonials />} />

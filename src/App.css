@@ -446,3 +446,11 @@ Image:hover {
   margin-left: 1070px;
   margin-top: 20px;
 }
+
+.dropdown-menu .dropdown-item.active,
+.dropdown-menu .dropdown-item:active {
+  background-color: transparent !important;
+  color: black !important;
+}
+
+
