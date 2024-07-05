@@ -49,11 +49,14 @@ function App() {
           <Route path='verification-success' element={<Verification_success/>} />
           <Route path='day-rental' element={<DayRental/>} />
           <Route path='search' element={<Search/>} />
+          <Route path='upload-image' element={<upload_image/>} />
+
         </Routes>
         <Footer />
       </BrowserRouter>
     </div>
   );
+  
 }
 
 export default App;

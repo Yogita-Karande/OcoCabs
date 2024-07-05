@@ -16,7 +16,6 @@ const getResponse = (data) => {
     return data.data.message;
 }
 
-
 export const makeEnquiry = async (postData) => {
     try {
         postData.api = 'create-enquiry'

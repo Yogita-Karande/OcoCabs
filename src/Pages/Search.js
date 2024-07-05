@@ -2,19 +2,21 @@ import { useEffect, useState } from 'react';
 import { Col, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import { createBooking } from '../api/Api';
+import { useAuth } from "../authentication_token/AuthProvider";
 
 function Search() {
 
-    const [formvalues, setformvalues] = useState()
+    const [formvalues, setformvalues] = useState({destination:'', source:'', time:'', type:'', ret_time:'', car_type:''})
     const [data, setData] = useState();
     const [error, setError] = useState();
     const [token, setToken] = useState();
+    const { getToken } = useAuth()
     const navigate = useNavigate();
 
     useEffect(() => {
-        const tokenFromStorage = localStorage.getItem('token');
-        setToken(tokenFromStorage);
-    }, []);
+        const mytoken = getToken();
+        setToken(mytoken)
+    }, [getToken]);
 
     const handleCreateBooking = async (e) => {
         e.preventDefault();
@@ -46,12 +48,12 @@ function Search() {
                
             </Col>
                 <Col>
-                    {/* {notification && (
-                        notification.map((item, index) => {
+                    {/* {data && (
+                        data.map((item, index) => {
                             return (
                                 <Card key={index} className="mx-3 text-muted my-3">
                                     <ul>
-                                        <li className="my-3" value={item.id}>{item.notification}</li>
+                                        <li className="my-3" value={item.id}>{item.data}</li>
                                     </ul>
                                     <Col className="d-grid gap-2 text-center search-link text-white mt-4" rounded>
                                         <button size="md" type='search' className='btn btn-md btn-block text-white' onSubmit={handleCreateBooking}> Book Cab </button>

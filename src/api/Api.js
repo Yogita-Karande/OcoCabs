@@ -138,10 +138,10 @@ export const getRouteDetails = async (postData) => {
  * @postData -> form data (api , token )
  */
 
-export const getNotifications = async (token) => {
+export const getNotifications = async (api,token) => {
     try {
         const postData = {
-            api:'get-notifications',
+            api:api,
             token: token
         };
         const response = await axios.post(BASE_URL, postData, {
@@ -161,13 +161,9 @@ export const getNotifications = async (token) => {
  * @postData -> form data (api , token )
  */
 
-export const updateProfile = async (updatevalues, token) => {
+export const updateProfile = async (postData) => {
     try {
-        const postData = {
-            api:'update-profile',
-            updatevalues : updatevalues,
-            token: token
-        };
+        postData.api ='update-profile'
         const response = await axios.post(BASE_URL, postData, {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -181,6 +177,7 @@ export const updateProfile = async (updatevalues, token) => {
     }
 }
 
+
 /*****
  * Used to upload profile
  * @postData -> form data (api , token )
@@ -192,7 +189,7 @@ export const getProfile = async (token) => {
             api:'get-profile',
             token: token
         };
-        const response = await axios.post(BASE_URL, postData, {
+        const response = await axios.post(BASE_URL,postData, {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
             }
@@ -210,15 +207,12 @@ export const getProfile = async (token) => {
  * @postData -> form data (api , token )
  */
 
-export const uploadProfilePhoto = async (token) => {
+export const uploadProfilePhoto = async (formData) => {
     try {
-        const postData = {
-            api:'upload-profile-photo',
-            token: token
-        };
-        const response = await axios.post(BASE_URL, postData, {
+        const response = await axios.post(BASE_URL,formData , {
             headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
+            //   'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'multipart/form-data'
             }
         });
         return (response);
